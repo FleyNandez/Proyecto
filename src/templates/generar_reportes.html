@@ -1,0 +1,174 @@
+{% extends "layout.html" %}
+
+{% block contenido %}
+<head>
+   
+    <style>
+        body {background-color: rgb(4, 131, 148);}
+    </style>
+    <style>
+        .enlace1{
+        display: inline-block;
+        color: beige;
+        text-decoration: none;
+        background-color: rgb(79, 101, 121);
+        padding: 15px;
+        margin: 25 px 0 px;
+        }
+
+
+        </style> 
+
+<style>
+    .enlace8{
+    display: inline-block;
+    color: beige;
+    text-decoration: none;
+    background-color: rgb(79, 101, 121);
+    padding: 15px;
+    margin: 25 px 0 px;
+    }
+    </style>
+
+
+</head>
+<body style="background: url('registrar.jpeg'); background: size 32px cover;"></body>
+
+<a class="enlace1" href="inicio" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  ⭠ INICIO    
+</a>
+
+<body>            
+    <h1 style= "color:rgb(0, 90, 150)" >   
+      
+             <p align="left">INGRESA LOS DATOS DE TU SOLICITUD </p>    
+    </h1>     
+        <h1 style= "color:rgb(10, 10, 10)">
+        
+        <form id="miFormulario" action="Solicitud_Registrada_con_Exito.html" method="post">
+        <div class="mb-3">
+            <label for="Nombre" class="form-label">Nombre</label>            
+            <input type="text" class="form-control is-valid" placeholder="Ingrese su nombre" id="Nombre" value="" required>
+          <div class="valid-feedback">  
+          </div>
+
+          <div class="mb-3">
+            <label for="Apellido" class="form-label">Apellido</label>            
+            <input type="text" class="form-control is-valid" placeholder="Ingrese su Apellido" id="Nombre" value="" required>
+          <div class="valid-feedback">  
+          </div>
+
+                      
+
+          <div class="col-md-3">
+            <label for="validationServer04" class="form-label">Documento</label>
+            <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+              <option selected disabled value="">Tipo...</option>
+              <option>Cedula ciudadania</option>
+              <option>Cedula extranjera</option>
+              
+            
+
+              <div class="mb-3">
+                <label for="Numero_documento" class="form-label">Numero Documento</label>            
+                <input type="text" class="form-control is-valid" placeholder="1234" id="Nombre" value="" required>
+              <div class="valid-feedback">  
+              </div>
+
+              <div class="mb-3">
+                <label for="Dirección" class="form-label">Dirección</label>            
+                <input type="text" class="form-control is-valid" placeholder="Dirección" id="Nombre" value="" required>
+              <div class="valid-feedback">                  
+              </div>
+
+              <div class="col-md-3">
+                <label for="validationServer04" class="form-label">Localidad</label>
+                <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+                  <option selected disabled value="">Localidad...</option>
+                  <option>1. Usaquén</option>
+                  <option>2. Chapinero</option>
+                  <option>3. Santa Fe</option>
+                  <option>4. San Cristóbal</option>
+                  <option>5. Usme</option>
+                  <option>6. Tunjuelito</option>
+                  <option>7. Bosa</option>
+                  <option>8. Kennedy</option>
+                  <option>9. Fontibón</option>
+                  <option>10. Engativá</option>
+                  <option>11. Suba</option>
+                  <option>12. Barrios Unidos</option>
+                  <option>13. Teusaquillo</option>
+                  <option>14. Mártires</option>
+                  <option>15. Antonio Nariño</option>
+                  <option>16. Puente Aranda</option>
+                  <option>17. Candelaria</option>
+                  <option>18. Rafael Uribe Uribe</option>
+                  <option>19. Ciudad Bolívar</option>
+                  <option>20. Sumapaz</option>
+                </div>
+
+                <div class="mb-3">
+                    <label for="Apellido" class="form-label">Bogotá</label>            
+                    <input type="text" class="form-control is-valid" id="Nombre" value="Bogotá" required>
+                  <div class="valid-feedback">  
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="Correo" class="form-label">Correo</label>            
+                    <input type="text" class="form-control is-valid" placeholder="Opcional" >
+                  <div class="valid-feedback">                  
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="Celular" class="form-label">Celular</label>            
+                    <input type="text" class="form-control is-valid" placeholder="Opcional" >
+                  <div class="valid-feedback">                  
+                  </div>
+
+                  <div class="col-md-3">
+                    <label for="validationServer04" class="form-label">Tipo de Falla</label>
+                    <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
+                      <option selected disabled value="">Tipo...</option>
+                      <option>Luminaria apagada</option>
+                      <option>Luminaria hurtada</option>
+                      <option>Sector sin alumbrado</option>
+                      <option>Cables sueltos</option>
+                      <option>Poste en mal estado</option>
+                      <option>Solicitud luminaria nueva</option>
+
+                      <div class="mb-3">
+                        <label for="Bogotá" class="form-label">Bogotá</label>            
+                        <input type="text" class="form-control is-valid" id="Nombre" value="Bogotá" required>
+                      <div class="valid-feedback">  
+                      </div>    
+                      
+                    </h1> 
+                             
+              
+                <h1 style= "color:rgb(189, 186, 9)"> 
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+            <label class="form-check-label" for="invalidCheck3">
+              La información ingresada es correcta
+            </label>           
+          </div>
+          <script>
+            document.getElementById("miFormulario").addEventListener("submit", function(event) {
+             
+                event.preventDefault();
+        
+                window.location.href = "/registro_exitoso";
+            });
+        </script>
+
+          <div class="col-12">           
+            <button class="btn btn-primary" type="submit">Registrar Solicitud</button>
+         </form>             
+       
+          </div>
+     
+</body>
+
+{% endblock contenido %}
+ 
