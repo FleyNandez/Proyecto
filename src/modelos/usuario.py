@@ -1,9 +1,11 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum, DateTime
+import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum
+from src.modelos import Session, Base 
 
 
-class Usuario():
+class Usuario(Base):
     __tablename__ = "Usuario"
     id = Column (Integer, primary_key = True)
     orden_trabajo = Column (Integer, ForeignKey("orden_trabajo.id"), nullable = False)
@@ -19,18 +21,18 @@ class Usuario():
     localidad = Column (Enum(LocalidadEnum), unique = True, nullable = False) 
     
     def __init__(self, orden_trabajo, fecha_reporte, nombre, apellido, tipo_documento, numero_documento, direccion_falla,email, celular, tipo_falla, localidad):
-   
-    self.orden_trabajo = orden_trabajo
-    self.fecha_reporte = fecha_reporte
-    self.nombre = nombre
-    self.apellido = apellido
-    self.tipo_documento = tipo_documento
-    self.numero_documento = numero_documento
-    self.direccion_falla = direccion_falla
-    self.email = email
-    self.celular = celular
-    self.tipo_falla = tipo_falla
-    self.localidad = localidad
+        
+        self.orden_trabajo = orden_trabajo
+        self.fecha_reporte = fecha_reporte
+        self.nombre = nombre
+        self.apellido = apellido
+        self.tipo_documento = tipo_documento
+        self.numero_documento = numero_documento
+        self.direccion_falla = direccion_falla
+        self.email = email
+        self.celular = celular
+        self.tipo_falla = tipo_falla
+        self.localidad = localidad
     
     
     

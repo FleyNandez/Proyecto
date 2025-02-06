@@ -32,7 +32,7 @@
 
 
 </head>
-<body style="background: url('registrar.jpeg'); background: size 32px cover;"></body>
+<body style="background: url('{{ url_for('static', filename='images/registrar.jpeg') }}'); background-size: cover;">
 
 <a class="enlace1" href="inicio" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   ⭠ INICIO    
@@ -145,7 +145,7 @@
                     </h1> 
                              
               
-                <h1 style= "color:rgb(189, 186, 9)"> 
+                <h1 style= "color:rgb(189, 45, 9)"> 
         <div class="col-12">
           <div class="form-check">
             <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>

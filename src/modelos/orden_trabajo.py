@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
 from sqlalchemy.ext.declarative import declarative_base
+from src.modelos import Session, Base 
 
-Base = declarative_base()
 
-class orden_trabajo():
+class orden_trabajo(Base):
     __tablename__ = "orden_trabajo"
     id = Column (Integer, primary_key = True)
     direccion_falla = Column (String(300), unique = True, nullable = False)
@@ -13,4 +13,4 @@ class orden_trabajo():
     
 
 
-    ForeignKey
+   

@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
 from sqlalchemy.ext.declarative import declarative_base
+from src.modelos import Session, Base 
 
-class Falla():
+class Falla(Base):
     __tablename__ = "Falla"
     id = Column (Integer, primary_key = True)
     tipo_falla = Column (Enum(TipoFallaEnum), unique = True, nullable = False)
