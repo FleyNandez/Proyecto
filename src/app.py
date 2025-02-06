@@ -1,5 +1,16 @@
+
 from flask import Flask, render_template
 from src.modelos import Base, engine 
+from src.modelos.usuario import Usuario
+from src.modelos.orden_trabajo import orden_trabajo
+from src.modelos.movil import Movil
+from src.modelos.fallas import Falla
+
+
+
+
+
+
 
 app =Flask(__name__)
 

@@ -37,10 +37,6 @@ class TipoFallaEnum(PyEnum):
     opcion_4 = "poste en mal estado"
     opcion_5 = "Solicitud luminaria nueva"
     
-class MovilEnum(PyEnum):
-    opcion_1 = "liviano"
-    opcion_2 = "canasta"
-    opcion_3 = "subterraneo"
     
 class MovilEnum(PyEnum):
     opcion_1 = "Liviano-Fleyder Hernandez"
