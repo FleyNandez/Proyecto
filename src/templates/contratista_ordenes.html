@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block contenido %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>moviles_ordenes</title>
+    <style>
+       
+            .enlace1, .enlace6 {
+                display: inline-block;
+                color: beige;
+                text-decoration: none;
+                background-color: rgb(79, 101, 121);
+                padding: 15px;
+                margin: 25px 0px;
+            }
+    </style>
+</head>
+<body>
+    <div class="top-left">
+        <a class="enlace1" href="inicio" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ⭠ INICIO    
+         </a>
+    
+         <a class="enlace6" href="/contratista" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ⭠ REGRESAR    
+         </a>
+    </div>
+    
+</body>
+
+{% endblock contenido %}

@@ -7,11 +7,6 @@ from src.modelos.movil import Movil
 from src.modelos.fallas import Falla
 
 
-
-
-
-
-
 app =Flask(__name__)
 
 Base.metadata.create_all(engine)
@@ -54,3 +49,20 @@ def quienes_somos ():
 @app.route('/MOD')
 def MOD ():
     return render_template('MOD.html', titulo_pagina = "MOD")
+
+@app.route('/contratista')
+def contratista():
+    return render_template('contratista.html', titulo_pagina = "contratista")
+
+@app.route('/moviles')
+def moviles():
+    return render_template('moviles.html', titulo_pagina = "moviles")
+
+@app.route('/contratista_ordenes')
+def contratista_ordenes():
+    return render_template('contratista_ordenes.html', titulo_pagina = "contratista_ordenes")
+
+@app.route('/moviles_ordenes')
+def moviles_ordenes():
+    return render_template('moviles_ordenes.html', titulo_pagina = "moviles_ordenes")
+
