@@ -6,7 +6,7 @@ from .mis_enums import TipoFallaEnum
 class Falla(Base):
     __tablename__ = "Falla"
     id = Column (Integer, primary_key = True)
-    tipo_falla = Column (Enum(TipoFallaEnum), unique = True, nullable = False)
+    tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)
     orden_trabajo = Column (Integer, ForeignKey("Orden_Trabajo.id"), nullable = False) 
     
         

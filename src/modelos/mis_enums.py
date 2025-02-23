@@ -26,16 +26,17 @@ class LocalidadEnum(PyEnum):
     opcion_15 = "Antonio Nariño"
     opcion_16 = "Puente Aranda"
     opcion_17 = "Candelaria"
-    opcion_18 = "Rafael Uribe Uribe"
+    opcion_18 = "Rafael Uribe"
     opcion_19 = "Ciudad Bolívar"
     opcion_20 = "Sumapaz"
 
 class TipoFallaEnum(PyEnum):
-    opcion_1 = "luminaria hurtada"
-    opcion_2 = "sector sin alumbrado"
-    opcion_3 = "cables sueltos"
-    opcion_4 = "poste en mal estado"
-    opcion_5 = "Solicitud luminaria nueva"
+    opcion_1 = "luminaria apagada"
+    opcion_2 = "luminaria hurtada"
+    opcion_3 = "sector sin alumbrado"
+    opcion_4 = "cables sueltos"
+    opcion_5 = "poste en mal estado"
+    opcion_6 = "Solicitud luminaria nueva"
     
     
 class MovilEnum(PyEnum):

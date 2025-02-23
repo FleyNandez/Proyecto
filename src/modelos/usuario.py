@@ -8,7 +8,7 @@ from src.modelos import Session, Base
 class Usuario(Base):
     __tablename__ = "Usuario"
     id = Column (Integer, primary_key = True)
-    orden_trabajo = Column (Integer, ForeignKey("Orden_Trabajo.id"), nullable = False)
+    orden_trabajo = Column (Integer,  nullable = False)
     fecha_reporte = Column(DateTime, default=datetime.datetime, nullable=False)
     nombre = Column (String, nullable=False)
     apellido = Column (String, nullable=False)
@@ -17,8 +17,8 @@ class Usuario(Base):
     direccion_falla = Column (String(100), nullable=False)
     email = Column (String)
     celular = Column (String)
-    tipo_falla = Column (ForeignKey("Falla.id"), unique = True, nullable = False)
-    localidad = Column (Enum(LocalidadEnum), unique = True, nullable = False)     
+    tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)
+    localidad = Column (Enum(LocalidadEnum),  nullable = False)     
       
     
        

@@ -7,6 +7,7 @@ from src.modelos.movil import Movil
 from src.modelos.fallas import Falla
 
 
+
 app =Flask(__name__)
 
 Base.metadata.create_all(engine)
