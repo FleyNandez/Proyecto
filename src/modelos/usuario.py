@@ -35,3 +35,7 @@ class Usuario(Base):
         self.celular = celular
         self.tipo_falla = tipo_falla
         self.localidad = localidad
+        
+    def obtener_usuario():
+        usuario = Session.query(Usuario).all()
+        return usuario 

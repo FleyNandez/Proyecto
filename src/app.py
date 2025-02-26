@@ -21,6 +21,7 @@ def index():
 
 @app.route('/generar_reporte')
 def generar_reporte():
+    usuario = Usuario.obtener_usuario()
     return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
 
 @app.route('/registro_exitoso')
@@ -31,9 +32,6 @@ def registro_exitoso():
 def inicio():
     return render_template('index.html', titulo_pagina = "INICIO")
 
-@app.route('/generar_reporte')
-def nuevo_registro():
-    return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
 
 @app.route('/consultar')
 def consultar():
