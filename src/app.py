@@ -1,10 +1,12 @@
 
 from flask import Flask, render_template
-from src.modelos import Base, engine 
+from src.modelos import Base, engine, session
 from src.modelos.usuario import Usuario
+from src.modelos.contratista import Contratista
 from src.modelos.orden_trabajo import orden_trabajo
 from src.modelos.movil import Movil
 from src.modelos.fallas import Falla
+from src.modelos.mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum
 
 
 
@@ -20,8 +22,7 @@ def index():
     return render_template('index.html', titulo_pagina = "INICIO")
 
 @app.route('/generar_reporte')
-def generar_reporte():
-    usuario = Usuario.obtener_usuario()
+def generar_reporte():       
     return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
 
 @app.route('/registro_exitoso')
@@ -57,11 +58,15 @@ def contratista():
 def moviles():
     return render_template('moviles.html', titulo_pagina = "moviles")
 
+
 @app.route('/contratista_ordenes')
-def contratista_ordenes():
-    return render_template('contratista_ordenes.html', titulo_pagina = "contratista_ordenes")
+def contratista_ordenes():        
+        return render_template('contratista_ordenes.html', titulo_pagina="CONTRATISTA ORDENES")
+   
+
 
 @app.route('/moviles_ordenes')
 def moviles_ordenes():
-    return render_template('moviles_ordenes.html', titulo_pagina = "moviles_ordenes")
+    return render_template('moviles_ordenes.html', titulo_pagina = "MOVILES ORDENES")
+ 
 

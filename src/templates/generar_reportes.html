@@ -45,7 +45,7 @@
     </h1>     
         <h1 style= "color:rgb(10, 10, 10)">
         
-        <form id="miFormulario" action="Solicitud_Registrada_con_Exito.html" method="post">
+          <form id="miFormulario" action="Solicitud_Registrada_con_Exito.html" method="post">
         <div class="mb-3">
             <label for="Nombre" class="form-label">Nombre</label>            
             <input type="text" class="form-control is-valid" placeholder="Ingrese su nombre" id="Nombre" value="" required>
@@ -167,6 +167,32 @@
          </form>             
        
           </div>
+
+          <h2>Lista de Usuarios</h2>
+          <table>
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Direccion</th>
+                      <th>Email</th>
+                      <th>Celular</th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for usuario in usuarios %}
+                  <tr>
+                      <td>{{ usuario.id }}</td>
+                      <td>{{ usuario.nombre }}</td>
+                      <td>{{ usuario.apellido }}</td>
+                      <td>{{ usuario.direccion }}</td>
+                      <td>{{ usuario.email }}</td>
+                      <td>{{ usuario.celular }}</td>
+                      
+                  </tr>
+                  {% endfor %}
      
 </body>
 

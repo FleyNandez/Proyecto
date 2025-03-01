@@ -9,7 +9,7 @@ class Usuario(Base):
     __tablename__ = "Usuario"
     id = Column (Integer, primary_key = True)
     orden_trabajo = Column (Integer,  nullable = False)
-    fecha_reporte = Column(DateTime, default=datetime.datetime, nullable=False)
+    fecha_reporte = Column(DateTime, default=datetime.datetime.now, nullable=False)
     nombre = Column (String, nullable=False)
     apellido = Column (String, nullable=False)
     tipo_documento = Column (Enum(TipoDocumentoEnum), nullable=False)
@@ -36,6 +36,4 @@ class Usuario(Base):
         self.tipo_falla = tipo_falla
         self.localidad = localidad
         
-    def obtener_usuario():
-        usuario = Session.query(Usuario).all()
-        return usuario 
+   
