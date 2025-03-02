@@ -8,7 +8,7 @@ from src.modelos import Session, Base
 class Usuario(Base):
     __tablename__ = "Usuario"
     id = Column (Integer, primary_key = True)
-    orden_trabajo = Column (Integer,  nullable = False)
+    orden_trabajo = Column(Integer, default=id, nullable=False)
     fecha_reporte = Column(DateTime, default=datetime.datetime.now, nullable=False)
     nombre = Column (String, nullable=False)
     apellido = Column (String, nullable=False)

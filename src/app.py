@@ -28,7 +28,8 @@ def generar_reporte():
 
 @app.route('/registro_exitoso')
 def registro_exitoso():
-    return render_template('solicitud_registrada_con_exito.html', titulo_pagina = "REGISTRO EXITOSO")
+    id = request.args.get('id')
+    return render_template('solicitud_registrada_con_exito.html', titulo_pagina = "REGISTRO EXITOSO", id=id)
 
 @app.route('/inicio')
 def inicio():
@@ -83,15 +84,11 @@ def registrar_falla():
     localidad = request.form['localidad']
     email = request.form.get('email')
     celular = request.form.get('celular')
-    tipo_falla = request.form['tipo_falla']
+    tipo_falla = request.form['tipo_falla']  
     
-    
-    
-    print(f"Datos recibidos: nombre={nombre}, apellido={apellido}, tipo_documento={tipo_documento}")    
-       
+           
     ultimo_orden_trabajo = session.query(Usuario).order_by(Usuario.orden_trabajo.desc()).first()
-    nuevo_orden_trabajo = ultimo_orden_trabajo.orden_trabajo + 1 if ultimo_orden_trabajo else 1
-    
+    nuevo_orden_trabajo = ultimo_orden_trabajo.orden_trabajo + 1 if ultimo_orden_trabajo else 1    
 
 
     nuevo_usuario = Usuario(
@@ -108,13 +105,11 @@ def registrar_falla():
         tipo_falla=tipo_falla        
     )
     
-    print(f"Nuevo usuario creado: {nuevo_usuario.nombre}, Orden de trabajo: {nuevo_usuario.orden_trabajo}")
-
     with session.begin():
-        session.add(nuevo_usuario)
-        print("Nuevo usuario agregado a la base de datos")
-
-    return redirect(url_for('registro_exitoso'))
+        session.add(nuevo_usuario)   
+        session.flush()
+        nuevo_id = nuevo_usuario.id     
+    return redirect(url_for('registro_exitoso', id=nuevo_id))
 
 if __name__ == '__main__':
     app.run(debug=True)
