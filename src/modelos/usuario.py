@@ -15,10 +15,11 @@ class Usuario(Base):
     tipo_documento = Column (Enum(TipoDocumentoEnum), nullable=False)
     numero_documento = Column (String(20), nullable=False )
     direccion_falla = Column (String(100), nullable=False)
+    localidad = Column (Enum(LocalidadEnum),  nullable = False) 
     email = Column (String)
     celular = Column (String)
-    tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)
-    localidad = Column (Enum(LocalidadEnum),  nullable = False)     
+    tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)  
+         
       
     
        
@@ -31,9 +32,16 @@ class Usuario(Base):
         self.tipo_documento = tipo_documento
         self.numero_documento = numero_documento
         self.direccion_falla = direccion_falla
+        self.localidad = localidad
         self.email = email
         self.celular = celular
         self.tipo_falla = tipo_falla
-        self.localidad = localidad
         
-   
+        
+    
+    @staticmethod
+    def obtener_datos_usuario():
+        with Session() as session:
+            usuarios = session.query(Usuario).all()
+        return usuarios
+    

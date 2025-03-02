@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
 
 {% block contenido %}
-<head>
-   
+<head>   
     <style>
         body {background-color: rgb(4, 131, 148);}
     </style>
@@ -12,24 +11,10 @@
         color: beige;
         text-decoration: none;
         background-color: rgb(79, 101, 121);
-        padding: 15px;
+        padding: 0.5px;
         margin: 25 px 0 px;
         }
-
-
         </style> 
-
-<style>
-    .enlace8{
-    display: inline-block;
-    color: beige;
-    text-decoration: none;
-    background-color: rgb(79, 101, 121);
-    padding: 15px;
-    margin: 25 px 0 px;
-    }
-    </style>
-
 
 </head>
 <body style="background: url('{{ url_for('static', filename='images/registrar.jpeg') }}'); background-size: cover;">
@@ -37,54 +22,41 @@
 <a class="enlace1" href="inicio" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   ⭠ INICIO    
 </a>
-
 <body>            
-    <h1 style= "color:rgb(0, 90, 150)" >   
-      
+    <h1 style= "color:rgb(0, 90, 150)" >        
              <p align="left">INGRESA LOS DATOS DE TU SOLICITUD </p>    
     </h1>     
         <h1 style= "color:rgb(10, 10, 10)">
-        
-          <form id="miFormulario" action="Solicitud_Registrada_con_Exito.html" method="post">
-        <div class="mb-3">
-            <label for="Nombre" class="form-label">Nombre</label>            
-            <input type="text" class="form-control is-valid" placeholder="Ingrese su nombre" id="Nombre" value="" required>
-          <div class="valid-feedback">  
-          </div>
 
-          <div class="mb-3">
-            <label for="Apellido" class="form-label">Apellido</label>            
-            <input type="text" class="form-control is-valid" placeholder="Ingrese su Apellido" id="Nombre" value="" required>
-          <div class="valid-feedback">  
-          </div>
-
-                      
-
-          <div class="col-md-3">
-            <label for="validationServer04" class="form-label">Documento</label>
-            <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
-              <option selected disabled value="">Tipo...</option>
-              <option>Cedula ciudadania</option>
-              <option>Cedula extranjera</option>
-              
-            
-
-              <div class="mb-3">
-                <label for="Numero_documento" class="form-label">Numero Documento</label>            
-                <input type="text" class="form-control is-valid" placeholder="1234" id="Nombre" value="" required>
-              <div class="valid-feedback">  
-              </div>
-
-              <div class="mb-3">
-                <label for="Dirección" class="form-label">Dirección</label>            
-                <input type="text" class="form-control is-valid" placeholder="Dirección" id="Nombre" value="" required>
-              <div class="valid-feedback">                  
-              </div>
-
-              <div class="col-md-3">
-                <label for="validationServer04" class="form-label">Localidad</label>
-                <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
-                  <option selected disabled value="">Localidad...</option>
+<form id="miFormulario" action="/registrar_falla" method="post">
+  <div class="mb-3">
+      <label for="Nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control is-valid" name="nombre" placeholder="Ingrese su nombre" required>
+  </div>
+  <div class="mb-3">
+      <label for="Apellido" class="form-label">Apellido</label>
+      <input type="text" class="form-control is-valid" name="apellido" placeholder="Ingrese su Apellido" required>
+  </div>
+  <div class="col-md-3">
+      <label for="validationServer04" class="form-label">Documento</label>
+      <select class="form-select is-invalid" name="tipo_documento" required>
+          <option selected disabled value="">Tipo...</option>
+          <option value="cedula_ciudadania">Cédula Ciudadanía</option>
+          <option value="cedula_extranjera">Cédula Extranjera</option>
+      </select>
+  </div> 
+  <div class="mb-3">
+    <label for="Numero_documento" class="form-label">Número Documento</label>
+    <input type="number" class="form-control is-valid" name="numero_documento" placeholder="1234" required min="0">
+</div>
+  <div class="mb-3">
+      <label for="Dirección" class="form-label">Dirección</label>
+      <input type="text" class="form-control is-valid" name="direccion_falla" placeholder="Dirección" required>
+  </div>
+  <div class="col-md-3">
+      <label for="validationServer04" class="form-label">Localidad</label>
+      <select class="form-select is-invalid" name="localidad" required>
+          <option selected disabled value="">Localidad...</option>
                   <option>1. Usaquén</option>
                   <option>2. Chapinero</option>
                   <option>3. Santa Fe</option>
@@ -105,96 +77,52 @@
                   <option>18. Rafael Uribe Uribe</option>
                   <option>19. Ciudad Bolívar</option>
                   <option>20. Sumapaz</option>
-                </div>
-
-                <div class="mb-3">
-                    <label for="Apellido" class="form-label">Bogotá</label>            
-                    <input type="text" class="form-control is-valid" id="Nombre" value="Bogotá" required>
-                  <div class="valid-feedback">  
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="Correo" class="form-label">Correo</label>            
-                    <input type="text" class="form-control is-valid" placeholder="Opcional" >
-                  <div class="valid-feedback">                  
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="Celular" class="form-label">Celular</label>            
-                    <input type="text" class="form-control is-valid" placeholder="Opcional" >
-                  <div class="valid-feedback">                  
-                  </div>
-
-                  <div class="col-md-3">
-                    <label for="validationServer04" class="form-label">Tipo de Falla</label>
-                    <select class="form-select is-invalid" id="validationServer04" aria-describedby="validationServer04Feedback" required>
-                      <option selected disabled value="">Tipo...</option>
+      </select>
+  </div>
+  <div class="mb-3">
+      <label for="Correo" class="form-label">Correo</label>
+      <input type="email" class="form-control is-valid" name="email" placeholder="Opcional">
+  </div>
+  <div class="mb-3">
+      <label for="Celular" class="form-label">Celular</label>
+      <input type="tel" class="form-control is-valid" name="celular" placeholder="Opcional">
+  </div>
+  <div class="col-md-3">
+      <label for="validationServer04" class="form-label">Tipo de Falla</label>
+      <select class="form-select is-invalid" name="tipo_falla" required>
+          <option selected disabled value="">Tipo...</option>
                       <option>Luminaria apagada</option>
                       <option>Luminaria hurtada</option>
                       <option>Sector sin alumbrado</option>
                       <option>Cables sueltos</option>
                       <option>Poste en mal estado</option>
                       <option>Solicitud luminaria nueva</option>
+      </select>
+  </div>
+  <div class="col-12">
+    <h1 style= "color:rgb(189, 45, 9)"> </h1> 
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
+        <label class="form-check-label" for="invalidCheck3">
+          LA INFORMACIÓN INGRESADA ES CORRECTA
+        </label>           
+      </div>  </h1> 
+  </div>
+  <div class="col-12">
+      <button class="btn btn-primary" type="submit">Registrar Solicitud</button>
+  </form>
+</div>
 
-                      <div class="mb-3">
-                        <label for="Bogotá" class="form-label">Bogotá</label>            
-                        <input type="text" class="form-control is-valid" id="Nombre" value="Bogotá" required>
-                      <div class="valid-feedback">  
-                      </div>    
-                      
-                    </h1> 
-                             
-              
-                <h1 style= "color:rgb(189, 45, 9)"> 
-        <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" aria-describedby="invalidCheck3Feedback" required>
-            <label class="form-check-label" for="invalidCheck3">
-              La información ingresada es correcta
-            </label>           
-          </div>
-          <script>
-            document.getElementById("miFormulario").addEventListener("submit", function(event) {
-             
-                event.preventDefault();
-        
-                window.location.href = "/registro_exitoso";
-            });
-        </script>
+<script>
+  document.getElementById("miFormulario").addEventListener("submit", function(event) {   
+      event.preventDefault();
+      window.location.href = "/registro_exitoso";
+  });
+</script>
 
-          <div class="col-12">           
-            <button class="btn btn-primary" type="submit">Registrar Solicitud</button>
-         </form>             
-       
-          </div>
-
-          <h2>Lista de Usuarios</h2>
-          <table>
-              <thead>
-                  <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Apellido</th>
-                      <th>Direccion</th>
-                      <th>Email</th>
-                      <th>Celular</th>
-                      
-                  </tr>
-              </thead>
-              <tbody>
-                  {% for usuario in usuarios %}
-                  <tr>
-                      <td>{{ usuario.id }}</td>
-                      <td>{{ usuario.nombre }}</td>
-                      <td>{{ usuario.apellido }}</td>
-                      <td>{{ usuario.direccion }}</td>
-                      <td>{{ usuario.email }}</td>
-                      <td>{{ usuario.celular }}</td>
-                      
-                  </tr>
-                  {% endfor %}
-     
 </body>
 
 {% endblock contenido %}
+
  

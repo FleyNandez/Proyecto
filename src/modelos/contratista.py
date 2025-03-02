@@ -18,9 +18,4 @@ class Contratista(Base):
         self.orden_trabajo = orden_trabajo
            
          
-    @classmethod
-    def obtener_datos_usuario():
-        
-        with Session() as session:
-            usuarios = session.query(Usuario).all()
-        return usuarios
+   
