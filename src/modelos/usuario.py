@@ -5,6 +5,8 @@ from .mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum
 from src.modelos import Session, Base 
 
 
+
+
 class Usuario(Base):
     __tablename__ = "Usuario"
     id = Column (Integer, primary_key = True)
@@ -19,11 +21,9 @@ class Usuario(Base):
     email = Column (String)
     celular = Column (String)
     tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)  
-         
-      
-    
-       
-    def __init__(self, orden_trabajo, fecha_reporte, nombre, apellido, tipo_documento, numero_documento, direccion_falla,email, celular, tipo_falla, localidad):
+               
+        
+    def __init__(self, orden_trabajo, fecha_reporte, nombre, apellido, tipo_documento, numero_documento, direccion_falla,localidad, email, celular, tipo_falla):
         
         self.orden_trabajo = orden_trabajo
         self.fecha_reporte = fecha_reporte
@@ -38,10 +38,22 @@ class Usuario(Base):
         self.tipo_falla = tipo_falla
         
         
-    
     @staticmethod
     def obtener_datos_usuario():
         with Session() as session:
-            usuarios = session.query(Usuario).all()
+            usuarios = session.query(Usuario).all()               
         return usuarios
+    
+    
+    @staticmethod
+    def agregar_datos_usuario(datos_usuario):
+        with Session() as session:
+         usuarios = session.add(datos_usuario)
+         session.commit()
+        return usuarios
+    
+   
+    
+    
+   
     

@@ -22,8 +22,22 @@ if __name__ == '__main__':
 def index():
     return render_template('index.html', titulo_pagina = "INICIO")
 
-@app.route('/generar_reporte')
+@app.route('/generar_reporte', methods = ['POST', 'GET'])
 def generar_reporte():       
+    if request.method == 'POST':
+        nombre = request.form.get('nombre')
+        apellido = request.form.get('apellido')
+        tipo_documento = request.form.get('tipo_documento')
+        numero_documento = request.form.get('numero_documento')
+        direccion_falla = request.form.get('direccion_falla')
+        localidad = request.form.get('localidad')
+        email = request.form.get('email')
+        celular = request.form.get('celular')
+        tipo_falla = request.form.get('tipo_falla')       
+                              
+        usuario = Usuario (nombre,apellido,tipo_documento,numero_documento,direccion_falla,localidad,email,celular,tipo_falla)
+        Usuario.agregar_datos_usuario(usuario)
+        return redirect(url_for('registro_exitoso'))
     return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
 
 @app.route('/registro_exitoso')
@@ -60,57 +74,14 @@ def contratista():
 def moviles():
     return render_template('moviles.html', titulo_pagina = "moviles")
 
-
-@app.route('/contratista_ordenes')
-def contratista_ordenes():      
-    usuarios = Usuario.obtener_datos_usuario()  
-    return render_template('contratista_ordenes.html', titulo_pagina="CONTRATISTA ORDENES", usuarios=usuarios)
-
-
 @app.route('/moviles_ordenes')
 def moviles_ordenes():
     return render_template('moviles_ordenes.html', titulo_pagina = "MOVILES ORDENES")
 
 
+@app.route('/contratista_ordenes')
+def contratista_ordenes():      
+    usuarios = Usuario.obtener_datos_usuario()     
+    return render_template('contratista_ordenes.html', titulo_pagina="CONTRATISTA ORDENES", usuarios=usuarios)
 
-
-@app.route('/registrar_falla', methods=['POST'])
-def registrar_falla():
-    nombre = request.form['nombre']
-    apellido = request.form['apellido']
-    tipo_documento = request.form['tipo_documento']
-    numero_documento = request.form['numero_documento']
-    direccion_falla = request.form['direccion_falla']
-    localidad = request.form['localidad']
-    email = request.form.get('email')
-    celular = request.form.get('celular')
-    tipo_falla = request.form['tipo_falla']  
-    
-           
-    ultimo_orden_trabajo = session.query(Usuario).order_by(Usuario.orden_trabajo.desc()).first()
-    nuevo_orden_trabajo = ultimo_orden_trabajo.orden_trabajo + 1 if ultimo_orden_trabajo else 1    
-
-
-    nuevo_usuario = Usuario(
-        orden_trabajo=nuevo_orden_trabajo,
-        fecha_reporte=datetime.datetime.now(),
-        nombre=nombre,
-        apellido=apellido,
-        tipo_documento=tipo_documento,
-        numero_documento=numero_documento,
-        direccion_falla=direccion_falla,
-        localidad=localidad,
-        email=email,
-        celular=celular,
-        tipo_falla=tipo_falla        
-    )
-    
-    with session.begin():
-        session.add(nuevo_usuario)   
-        session.flush()
-        nuevo_id = nuevo_usuario.id     
-    return redirect(url_for('registro_exitoso', id=nuevo_id))
-
-if __name__ == '__main__':
-    app.run(debug=True)
     

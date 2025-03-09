@@ -5,8 +5,8 @@ from enum import Enum as PyEnum
 Base = declarative_base()
 
 class TipoDocumentoEnum(PyEnum):
-    cedula_ciudadania = "cedula ciudadania"
-    cedula_extranjera = "cedula extranjera"
+    CC = "cedula ciudadania"
+    CE = "cedula extranjera"
 
 class LocalidadEnum(PyEnum):
     localidad_1 = "Usaquén"
