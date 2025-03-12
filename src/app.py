@@ -79,9 +79,9 @@ def moviles_ordenes():
     return render_template('moviles_ordenes.html', titulo_pagina = "MOVILES ORDENES")
 
 
-@app.route('/contratista_ordenes')
-def contratista_ordenes():      
+@app.route('/orden_trabajo')
+def orden_trabajo():      
     usuarios = Usuario.obtener_datos_usuario()     
-    return render_template('contratista_ordenes.html', titulo_pagina="CONTRATISTA ORDENES", usuarios=usuarios)
+    return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios=usuarios)
 
     

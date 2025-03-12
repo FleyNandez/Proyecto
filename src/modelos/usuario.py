@@ -6,11 +6,9 @@ from src.modelos import Session, Base
 
 
 
-
 class Usuario(Base):
     __tablename__ = "Usuario"
     id = Column (Integer, primary_key = True)
-    orden_trabajo = Column(Integer, default=id, nullable=False)
     fecha_reporte = Column(DateTime, default=datetime.datetime.now, nullable=False)
     nombre = Column (String, nullable=False)
     apellido = Column (String, nullable=False)
@@ -23,10 +21,8 @@ class Usuario(Base):
     tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)  
                
         
-    def __init__(self, orden_trabajo, fecha_reporte, nombre, apellido, tipo_documento, numero_documento, direccion_falla,localidad, email, celular, tipo_falla):
+    def __init__(self, nombre, apellido, tipo_documento, numero_documento, direccion_falla,localidad, email, celular, tipo_falla):
         
-        self.orden_trabajo = orden_trabajo
-        self.fecha_reporte = fecha_reporte
         self.nombre = nombre
         self.apellido = apellido
         self.tipo_documento = tipo_documento
