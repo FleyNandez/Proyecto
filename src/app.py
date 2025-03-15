@@ -74,13 +74,14 @@ def contratista():
 def moviles():
     return render_template('moviles.html', titulo_pagina = "moviles")
 
-@app.route('/moviles_ordenes')
+@app.route('/moviles_ordenes', methods = ['POST', 'GET'])
 def moviles_ordenes():
-    return render_template('moviles_ordenes.html', titulo_pagina = "MOVILES ORDENES")
+    fallas = Falla.obtener_datos_falla() 
+    return render_template('moviles_ordenes.html', titulo_pagina = "Fallas", fallas=fallas)
 
 
 @app.route('/orden_trabajo')
-def orden_trabajo():      
+def orden():      
     usuarios = Usuario.obtener_datos_usuario()     
     return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios=usuarios)
 

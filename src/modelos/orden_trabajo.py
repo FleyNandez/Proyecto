@@ -8,19 +8,20 @@ class orden_trabajo(Base):
     __tablename__ = "Orden_Trabajo"
     id = Column (Integer, primary_key = True)
     direccion_falla = Column (String(300), unique = True, nullable = False)
-    tipo_falla = Column (Enum(TipoFallaEnum), unique = True, nullable = False)
     localidad = Column (Enum(LocalidadEnum), unique = True, nullable = False)
+    tipo_falla = Column (Enum(TipoFallaEnum), unique = True, nullable = False)    
     movil = Column (Enum(MovilEnum),ForeignKey("Movil.movil"), nullable = False) 
     
     
     
-    def __init__(self, direccion_falla,tipo_falla, localidad, movil):
+    def __init__(self, direccion_falla,localidad,tipo_falla, movil):
         
-        self.direccion_falla = direccion_falla
-        self.tipo_falla = tipo_falla
+        self.direccion_falla = direccion_falla        
         self.localidad = localidad
+        self.tipo_falla = tipo_falla
         self.movil = movil
     
+  
 
 
    
