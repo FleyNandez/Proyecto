@@ -3,8 +3,8 @@ import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from .mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum, MovilEnum
 from src.modelos import Session, Base 
-from sqlalchemy.orm import relationship
 
+from src.modelos.orden_trabajo import orden_trabajo
 
 
 class Usuario(Base):
@@ -21,7 +21,8 @@ class Usuario(Base):
     celular = Column (String)
     tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)  
     
-    orden_trabajo = relationship("orden_trabajo", back_populates="usuario", uselist=False)
+    
+    
                
         
     def __init__(self, nombre, apellido, tipo_documento, numero_documento, direccion_falla,localidad, email, celular, tipo_falla):
@@ -36,11 +37,10 @@ class Usuario(Base):
         self.celular = celular
         self.tipo_falla = tipo_falla
         
-        
     @staticmethod
     def obtener_datos_usuario():
         with Session() as session:
-            usuarios = session.query(Usuario).all()               
+            usuarios = session.query(Usuario).all()                            
         return usuarios
     
     
@@ -50,6 +50,14 @@ class Usuario(Base):
          usuarios = session.add(datos_usuario)
          session.commit()
         return usuarios
+    
+   
+
+
+
+
+
+
     
     
     

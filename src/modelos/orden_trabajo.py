@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from src.modelos import Session, Base 
 from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum
-from sqlalchemy.orm import relationship
+
 
 
 class orden_trabajo(Base):
@@ -12,8 +12,6 @@ class orden_trabajo(Base):
     localidad = Column (Enum(LocalidadEnum), unique = True, nullable = False)
     tipo_falla = Column (Enum(TipoFallaEnum), unique = True, nullable = False)    
     movil = Column (Enum(MovilEnum),nullable=True) 
-    
-    usuario = relationship("Usuario", back_populates="orden_trabajo")
     
     
     
@@ -26,18 +24,28 @@ class orden_trabajo(Base):
     
     
     @staticmethod
-    def asignar_movil(usuario_id, movil):
+    def asignar_movil(orden_trabajo_id, movil):
         with Session() as session:
-            # Buscar la orden vinculada al usuario
-            orden = session.query(orden_trabajo).filter_by(id=usuario_id).first()
+            orden = session.query(orden_trabajo).all()
             if orden:
-                orden.movil = movil  # Asignar el móvil
-                session.commit()  # Guardar los cambios
+                orden_trabajo.movil = movil 
+                session.commit() 
                 return True
             else:
-                print(f"No se encontró la orden para el ID de usuario: {usuario_id}")
+                print(f"No se encontró la orden para el ID de usuario: {orden_trabajo_id}")
                 return False
-        
+      
+
+       
+    @staticmethod
+    def obtener_ordenes_por_movil(movil):
+     with Session() as session:
+        ordenes = session.query(orden_trabajo).filter_by(movil=movil).all()
+        return ordenes
+    
+    
+
+    
 
                 
 

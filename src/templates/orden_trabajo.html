@@ -77,24 +77,26 @@
                 <th scope="row">{{usuario.email}}</th>
                 <th scope="row">{{usuario.celular}}</th>
                 <th scope="row">{{usuario.tipo_falla.value}}</th>
+
                 
                 <td style="text-align: center;">
                     {% if usuario.movil %}
-    <span style="color: green; font-weight: bold;">Asignado: {{ usuario.movil.value }}</span>
-          {% else %}
-        <form action="/moviles_ordenes" method="post" style="display: inline-block; margin: 0;">
-        <select id="movil-{{ usuario.id }}" name="movil" style="font-size: small; padding: 2px;" required>
-            <option value="movil_1">Liviano</option>
-            <option value="movil_2">Canasta</option>
-            <option value="movil_3">Subterráneo</option>
-        </select>
-        <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
-        <button type="submit" class="btn btn-sm btn-primary" style="font-size: small; padding: 2px 5px;">Asignar</button>
-          </form>
-         {% endif %}
-
-                                                
-            </tr>
+                        <span style="color: green; font-weight: bold;">Asignado: {{ usuario.movil.value }}</span>
+                    {% else %}
+                        <span style="color: red; font-weight: bold;">Pendiente</span>
+                        <form action="/moviles_ordenes" method="post" style="display: inline-block; margin: 5px 0;">
+                            <select id="movil-{{ usuario.id }}" name="movil" style="font-size: small; padding: 2px;" required>
+                                <option value=""></option>
+                                <option value="movil_1">Liviano</option>
+                                <option value="movil_2">Canasta</option>
+                                <option value="movil_3">Subterráneo</option>
+                            </select>
+                            <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: small; padding: 2px 5px;">Asignar</button>
+                        </form>
+                    {% endif %}
+                </td>
+                
             {% endfor %}    
          </tbody>
        </table>
