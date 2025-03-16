@@ -4,7 +4,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contratista Ordenes</title>
+    <title>Orden Trabajo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         .enlace1, .enlace6 {
@@ -59,6 +59,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Celular</th>
                 <th scope="col">Tipo Falla</th>
+                <th scope="col">Movil</th>
                                               
             </tr>
         </thead>
@@ -76,6 +77,22 @@
                 <th scope="row">{{usuario.email}}</th>
                 <th scope="row">{{usuario.celular}}</th>
                 <th scope="row">{{usuario.tipo_falla.value}}</th>
+                
+                <td style="text-align: center;">
+                    {% if usuario.movil %}
+    <span style="color: green; font-weight: bold;">Asignado: {{ usuario.movil.value }}</span>
+          {% else %}
+        <form action="/moviles_ordenes" method="post" style="display: inline-block; margin: 0;">
+        <select id="movil-{{ usuario.id }}" name="movil" style="font-size: small; padding: 2px;" required>
+            <option value="movil_1">Liviano</option>
+            <option value="movil_2">Canasta</option>
+            <option value="movil_3">Subterráneo</option>
+        </select>
+        <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
+        <button type="submit" class="btn btn-sm btn-primary" style="font-size: small; padding: 2px 5px;">Asignar</button>
+          </form>
+         {% endif %}
+
                                                 
             </tr>
             {% endfor %}    

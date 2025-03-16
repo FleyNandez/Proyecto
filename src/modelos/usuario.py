@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum, DateTime
 import datetime
 from sqlalchemy.ext.declarative import declarative_base
-from .mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum
+from .mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum, MovilEnum
 from src.modelos import Session, Base 
+from sqlalchemy.orm import relationship
 
 
 
@@ -19,6 +20,8 @@ class Usuario(Base):
     email = Column (String)
     celular = Column (String)
     tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)  
+    
+    orden_trabajo = relationship("orden_trabajo", back_populates="usuario", uselist=False)
                
         
     def __init__(self, nombre, apellido, tipo_documento, numero_documento, direccion_falla,localidad, email, celular, tipo_falla):
@@ -47,6 +50,8 @@ class Usuario(Base):
          usuarios = session.add(datos_usuario)
          session.commit()
         return usuarios
+    
+    
     
     
    

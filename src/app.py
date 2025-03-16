@@ -74,15 +74,58 @@ def contratista():
 def moviles():
     return render_template('moviles.html', titulo_pagina = "moviles")
 
-@app.route('/moviles_ordenes', methods = ['POST', 'GET'])
-def moviles_ordenes():
-    fallas = Falla.obtener_datos_falla() 
-    return render_template('moviles_ordenes.html', titulo_pagina = "Fallas", fallas=fallas)
+@app.route('/login', methods=['POST'])
+def login():
+    
+    username = request.form.get('username')
+    
+    if username == "movil_1":
+        return redirect(url_for('movil_liviano'))
+    elif username == "movil_2":
+        return redirect(url_for('movil_canasta'))
+    elif username == "movil_3":
+        return redirect(url_for('movil_subterraneo'))
+    
+
+@app.route('/movil_liviano')
+def movil_liviano():
+    return render_template('movil_liviano.html', titulo_pagina="movil Liviano")
+
+@app.route('/movil_canasta')
+def movil_canasta():
+    return render_template('movil_canasta.html', titulo_pagina="movil Canasta")
+
+@app.route('/movil_subterraneo')
+def movil_subterraneo():
+    return render_template('movil_subterraneo.html', titulo_pagina="movil Subterraneo")
 
 
 @app.route('/orden_trabajo')
 def orden():      
     usuarios = Usuario.obtener_datos_usuario()     
     return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios=usuarios)
+
+
+@app.route('/moviles_ordenes', methods=['POST', 'GET'])
+def moviles_ordenes():
+    if request.method == 'POST':
+        usuario_id = request.form.get('usuario_id') 
+        movil = request.form.get('movil')
+
+        asignado = orden_trabajo.asignar_movil(usuario_id, movil)
+
+        if asignado:
+            print(f"Orden asignada al móvil {movil}.")
+        else:
+            print(f"No se pudo asignar la orden para el usuario con ID {usuario_id}.")
+
+    usuarios = Usuario.obtener_datos_usuario()
+    return render_template('orden_trabajo.html', titulo_pagina="Ordenes de Trabajo", usuarios=usuarios)
+
+
+
+
+
+
 
     
