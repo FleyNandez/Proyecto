@@ -3,7 +3,7 @@ import psycopg2
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship
 
-engine = create_engine ("postgresql+psycopg2://postgres:123456@localhost:5432/proyecto_sena")
+engine = create_engine ("postgresql+psycopg2://postgres:123456@localhost:5432/PRUEBAS")
 
 connection = engine.connect()
 

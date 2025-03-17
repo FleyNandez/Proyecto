@@ -42,4 +42,4 @@ class TipoFallaEnum(PyEnum):
 class MovilEnum(PyEnum):
     movil_1 = "Liviano-Fleyder Hernandez"
     movil_2 = "Canasta-Jimmy Otalora"
-    movil_3 = "Subterraneo-Fabian Lopez"
+    movil_3 = "Subterraneo-Fabian Lopez" 

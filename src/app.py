@@ -89,15 +89,13 @@ def login():
 
 @app.route('/movil_liviano')
 def movil_liviano():
-    ordenes = orden_trabajo.obtener_ordenes_por_movil("movil_1")
-    return render_template('movil_liviano.html', titulo_pagina="Movil Liviano", ordenes=ordenes)
-
+    orden = orden_trabajo.obtener_ordenes_por_movil("movil_1")
+    return render_template('movil_liviano.html', titulo_pagina="Movil Liviano", orden=orden)
 
 @app.route('/movil_canasta')
 def movil_canasta():
     ordenes = orden_trabajo.obtener_ordenes_por_movil("movil_2")
-    return render_template('movil_canasta.html', titulo_pagina="Movil Canasta", ordenes=ordenes)
-
+    return render_template('movil_canasta.html', titulo_pagina="Movil Canasta", orden=ordenes)
 
 @app.route('/movil_subterraneo')
 def movil_subterraneo():
@@ -114,17 +112,20 @@ def orden():
 @app.route('/moviles_ordenes', methods=['POST', 'GET'])
 def moviles_ordenes():
     if request.method == 'POST':
-        orden_trabajo_id = request.form.get('usuario_id')                    
-        movil = request.form.get('movil')
-        asignado = orden_trabajo.asignar_movil(orden_trabajo_id, movil)
+        orden_trabajo_id = request.form.get('usuario_id')
+        movil_id = request.form.get('movil') 
+        
+        
+        asignado = orden_trabajo.asignar_movil(orden_trabajo_id, movil_id)
 
         if asignado:
-            print(f"Orden asignada al móvil {movil}.")
+            print(f"Orden asignada al móvil {movil_id}.")
         else:
             print(f"No se pudo asignar la orden para el usuario con ID {orden_trabajo_id}.")
     
     usuarios = Usuario.obtener_datos_usuario()
     return render_template('orden_trabajo.html', titulo_pagina="Ordenes de Trabajo", usuarios=usuarios)
+
 
 
 

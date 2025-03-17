@@ -4,7 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from .mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum, MovilEnum
 from src.modelos import Session, Base 
 
-from src.modelos.orden_trabajo import orden_trabajo
+
 
 
 class Usuario(Base):
@@ -21,9 +21,7 @@ class Usuario(Base):
     celular = Column (String)
     tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)  
     
-    
-    
-               
+          
         
     def __init__(self, nombre, apellido, tipo_documento, numero_documento, direccion_falla,localidad, email, celular, tipo_falla):
         
@@ -39,17 +37,17 @@ class Usuario(Base):
         
     @staticmethod
     def obtener_datos_usuario():
-        with Session() as session:
+      with Session() as session:
             usuarios = session.query(Usuario).all()                            
-        return usuarios
+      return usuarios
     
     
     @staticmethod
     def agregar_datos_usuario(datos_usuario):
-        with Session() as session:
+      with Session() as session:
          usuarios = session.add(datos_usuario)
          session.commit()
-        return usuarios
+      return usuarios
     
    
 
