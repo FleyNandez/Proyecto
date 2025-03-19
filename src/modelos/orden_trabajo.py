@@ -53,18 +53,3 @@ class orden_trabajo(Base):
      return ordenes
     
     
-
-    
-
-                
-
-                
-
-  
-
-
-   
-    
-
-
-    

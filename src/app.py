@@ -37,7 +37,9 @@ def generar_reporte():
                               
         usuario = Usuario (nombre,apellido,tipo_documento,numero_documento,direccion_falla,localidad,email,celular,tipo_falla)
         Usuario.agregar_datos_usuario(usuario)
-        return redirect(url_for('registro_exitoso'))
+        session.add(usuario)
+        session.commit()
+        return redirect(url_for('registro_exitoso', id=usuario.id))
     return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
 
 @app.route('/registro_exitoso')
@@ -126,16 +128,3 @@ def moviles_ordenes():
     usuarios = Usuario.obtener_datos_usuario()
     return render_template('orden_trabajo.html', titulo_pagina="Ordenes de Trabajo", usuarios=usuarios)
 
-
-
-
-
-
-
-
-
-
-
-
-
-    

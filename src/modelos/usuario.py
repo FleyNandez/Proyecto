@@ -49,16 +49,3 @@ class Usuario(Base):
          session.commit()
       return usuarios
     
-   
-
-
-
-
-
-
-    
-    
-    
-    
-   
-    
