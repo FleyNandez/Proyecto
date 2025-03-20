@@ -71,7 +71,7 @@
         </thead>
         <tbody>
             {% for usuario in usuarios %} 
-     <tr>
+         <tr>
                <th scope="row">{{usuario.id}}</th>
                <th scope="row">{{usuario.fecha_reporte}}</th>
                <th scope="row">{{usuario.nombre}}</th>
@@ -102,10 +102,11 @@
                     </form>
                  {% endif %}
             </td>
-                
+        </tr>  
            {% endfor %}    
          </tbody>
        </table>
+    </div>
      </tbody>
 {% endblock contenido %}  
 

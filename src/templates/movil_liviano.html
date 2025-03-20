@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movil Liviano</title>
+    <title>Movil liviano</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
         .enlace1, .enlace8 {
             display: inline-block;
@@ -15,20 +16,20 @@
         }
         .table-container {
             margin: 0.5px auto;
-            background-color: rgb(156, 194, 201);;
-            padding: 2px;
+            background-color: rgb(253, 253, 253);;
+            padding: 0.5px;
             border-radius: 3px;
             box-shadow: 0 0 10px rgb(245, 235, 235);
-            max-width: 80%;
+            max-width: 150%;
         }
         .table {
-            font-size: 2em;
+            font-size: 0.7em;
         }
         th, td {
-            padding: 3px;
+            padding: 8px;
         }
         body {
-            background-color:rgb(196, 214, 214);
+            background-color:rgb(181, 218, 216);
         }
     </style>
 </head>
@@ -62,7 +63,7 @@
           <td>{{ orden.localidad.value }}</td>
           <td>{{ orden.tipo_falla.value }}</td>
          <td>
-    <form action="/completar_orden" method="post" style="display: inline;">
+     <form action="/completar_orden" method="post" style="display: inline;">
        <input type="hidden" name="orden_id" value="{{ orden.id }}">
        <button type="submit" class="btn btn-success btn-sm">Completar</button>
    </form>

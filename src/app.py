@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from src.modelos import Base, engine, session
 from src.modelos.usuario import Usuario
 from src.modelos.contratista import Contratista
-from src.modelos.orden_trabajo import orden_trabajo
+from src.modelos.orden_trabajo import Orden_Trabajo
 from src.modelos.movil import Movil
 from src.modelos.fallas import Falla
 from src.modelos.mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum
@@ -39,6 +39,12 @@ def generar_reporte():
         Usuario.agregar_datos_usuario(usuario)
         session.add(usuario)
         session.commit()
+        
+              
+        orden_trabajo = Orden_Trabajo(id=usuario.id, direccion_falla=direccion_falla, localidad=localidad, tipo_falla=tipo_falla)
+        session.add(orden_trabajo)
+        session.commit()
+        
         return redirect(url_for('registro_exitoso', id=usuario.id))
     return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
 
@@ -91,17 +97,18 @@ def login():
 
 @app.route('/movil_liviano')
 def movil_liviano():
-    orden = orden_trabajo.obtener_ordenes_por_movil("movil_1")
-    return render_template('movil_liviano.html', titulo_pagina="Movil Liviano", orden=orden)
+    ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_1")
+    print(ordenes)
+    return render_template('movil_liviano.html', titulo_pagina="Movil Liviano", ordenes=ordenes)
 
 @app.route('/movil_canasta')
 def movil_canasta():
-    ordenes = orden_trabajo.obtener_ordenes_por_movil("movil_2")
-    return render_template('movil_canasta.html', titulo_pagina="Movil Canasta", orden=ordenes)
+    ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_2")
+    return render_template('movil_canasta.html', titulo_pagina="Movil Canasta", ordenes=ordenes)
 
 @app.route('/movil_subterraneo')
 def movil_subterraneo():
-    ordenes = orden_trabajo.obtener_ordenes_por_movil("movil_3")
+    ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_3")
     return render_template('movil_subterraneo.html', titulo_pagina="Movil Subterraneo", ordenes=ordenes)
 
 
@@ -118,7 +125,7 @@ def moviles_ordenes():
         movil_id = request.form.get('movil') 
         
         
-        asignado = orden_trabajo.asignar_movil(orden_trabajo_id, movil_id)
+        asignado = Orden_Trabajo.asignar_movil(orden_trabajo_id, movil_id)
 
         if asignado:
             print(f"Orden asignada al móvil {movil_id}.")
@@ -127,4 +134,7 @@ def moviles_ordenes():
     
     usuarios = Usuario.obtener_datos_usuario()
     return render_template('orden_trabajo.html', titulo_pagina="Ordenes de Trabajo", usuarios=usuarios)
+
+
+
 

@@ -3,6 +3,7 @@ import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from .mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum, MovilEnum
 from src.modelos import Session, Base 
+from sqlalchemy.orm import relationship
 
 
 
@@ -20,6 +21,8 @@ class Usuario(Base):
     email = Column (String)
     celular = Column (String)
     tipo_falla = Column (Enum(TipoFallaEnum),  nullable = False)  
+    
+    ordenes_trabajo = relationship("Orden_Trabajo", back_populates="usuario")
     
           
         
