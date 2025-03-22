@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_controller import FlaskControllerRegister
 from src.modelos import Base, engine, session
 from src.modelos.usuario import Usuario
 from src.modelos.contratista import Contratista
@@ -11,51 +12,27 @@ import datetime
 
 
 
+
 app =Flask(__name__)
 
 Base.metadata.create_all(engine)
 
+register = FlaskControllerRegister(app)
+register.register_package('src.controllers')
+
 if __name__ == '__main__':
     app.run(debug=True)
     
-@app.route('/')
-def index():
-    return render_template('index.html', titulo_pagina = "INICIO")
 
-@app.route('/generar_reporte', methods = ['POST', 'GET'])
-def generar_reporte():       
-    if request.method == 'POST':
-        nombre = request.form.get('nombre')
-        apellido = request.form.get('apellido')
-        tipo_documento = request.form.get('tipo_documento')
-        numero_documento = request.form.get('numero_documento')
-        direccion_falla = request.form.get('direccion_falla')
-        localidad = request.form.get('localidad')
-        email = request.form.get('email')
-        celular = request.form.get('celular')
-        tipo_falla = request.form.get('tipo_falla')       
-                              
-        usuario = Usuario (nombre,apellido,tipo_documento,numero_documento,direccion_falla,localidad,email,celular,tipo_falla)
-        Usuario.agregar_datos_usuario(usuario)
-        session.add(usuario)
-        session.commit()
-        
-              
-        orden_trabajo = Orden_Trabajo(id=usuario.id, direccion_falla=direccion_falla, localidad=localidad, tipo_falla=tipo_falla)
-        session.add(orden_trabajo)
-        session.commit()
-        
-        return redirect(url_for('registro_exitoso', id=usuario.id))
-    return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
+
+
 
 @app.route('/registro_exitoso')
 def registro_exitoso():
     id = request.args.get('id')
     return render_template('solicitud_registrada_con_exito.html', titulo_pagina = "REGISTRO EXITOSO", id=id)
 
-@app.route('/inicio')
-def inicio():
-    return render_template('index.html', titulo_pagina = "INICIO")
+
 
 
 @app.route('/consultar')
@@ -113,7 +90,7 @@ def movil_subterraneo():
 
 
 @app.route('/orden_trabajo')
-def orden():      
+def ordenes():      
     usuarios = Usuario.obtener_datos_usuario()     
     return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios=usuarios)
 
