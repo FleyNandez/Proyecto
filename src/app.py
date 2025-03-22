@@ -81,7 +81,7 @@ def moviles_ordenes():
 
 
 @app.route('/orden_trabajo')
-def orden():      
+def orden():     
     usuarios = Usuario.obtener_datos_usuario()     
     return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios=usuarios)
 

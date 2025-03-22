@@ -5,7 +5,7 @@ from src.modelos.mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnu
 from src.modelos.usuario import Usuario
 from src.modelos import Session, Base
 
-
+ 
 class Contratista(Base):
     __tablename__ = "Contratista"
     id = Column (Integer, primary_key = True)

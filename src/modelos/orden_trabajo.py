@@ -20,7 +20,7 @@ class orden_trabajo(Base):
         self.localidad = localidad
         self.tipo_falla = tipo_falla
         self.movil = movil
-    
+     
   
 
 

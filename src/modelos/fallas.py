@@ -10,7 +10,7 @@ class Falla(Base):
     tipo_falla = Column (Enum(TipoFallaEnum), unique = True, nullable = False)
     localidad = Column (Enum(LocalidadEnum), unique = True, nullable = False)
     
-    
+     
     
     
     def __init__(self, direccion_falla,tipo_falla, localidad):

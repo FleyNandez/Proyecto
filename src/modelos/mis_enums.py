@@ -38,7 +38,7 @@ class TipoFallaEnum(PyEnum):
     falla_5 = "poste en mal estado"
     falla_6 = "Solicitud luminaria nueva"
     
-    
+     
 class MovilEnum(PyEnum):
     movil_1 = "Liviano-Fleyder Hernandez"
     movil_2 = "Canasta-Jimmy Otalora"
