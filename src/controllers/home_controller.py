@@ -3,7 +3,9 @@ from flask import render_template
 from flask_controller import FlaskController
 
 
-class HomeControler(FlaskController):
+class HomeController(FlaskController):
+   
+   
     @app.route('/')
     def index():
        return render_template('index.html', titulo_pagina = "INICIO")

@@ -10,3 +10,11 @@ from src.modelos.mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnu
 from src.modelos import Base, engine, session
 
 
+class Orden_TrabajoController(FlaskController):
+    
+
+ @app.route('/orden_trabajo')
+ def ordenes():      
+    usuarios = Usuario.obtener_datos_usuario()     
+    return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios=usuarios)
+
