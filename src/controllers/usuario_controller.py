@@ -5,7 +5,7 @@ from src.modelos.usuario import Usuario
 from src.modelos.contratista import Contratista
 from src.modelos.orden_trabajo import Orden_Trabajo
 from src.modelos.movil import Movil
-from src.modelos.fallas import Falla
+from src.modelos.ordenes_cerradas import Ordenes_Cerradas
 from src.modelos.mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum
 from src.modelos import Base, engine, session
 

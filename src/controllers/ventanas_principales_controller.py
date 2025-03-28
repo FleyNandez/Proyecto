@@ -5,7 +5,7 @@ from src.modelos.usuario import Usuario
 from src.modelos.contratista import Contratista
 from src.modelos.orden_trabajo import Orden_Trabajo
 from src.modelos.movil import Movil
-from src.modelos.fallas import Falla
+from src.modelos.ordenes_cerradas import Ordenes_Cerradas
 from src.modelos.mis_enums import TipoDocumentoEnum, TipoFallaEnum, LocalidadEnum
 from src.modelos import Base, engine, session
 
@@ -27,7 +27,7 @@ class Ventanas_PrincipalesController(FlaskController):
    def solicitud_en_curso():
        return render_template('solicitud_en_curso.html', titulo_pagina = "SOLICITUD EN CURSO")
 
-   @app.route('/quienes_somos')
+   @app.route('/quienes_somos') 
    def quienes_somos ():
        return render_template('quienes_somos.html', titulo_pagina = "QUIENES SOMOS")
 

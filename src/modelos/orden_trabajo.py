@@ -29,7 +29,7 @@ class Orden_Trabajo(Base):
     @staticmethod
     def obtener_datos_orden():
         with Session() as session:
-            ordenes = session.query(Orden_Trabajo).all()  # Debes obtener datos de la tabla Orden_Trabajo
+            ordenes = session.query(Orden_Trabajo).all() 
         return ordenes
 
     @staticmethod
@@ -38,8 +38,8 @@ class Orden_Trabajo(Base):
             orden_trabajo = session.query(Orden_Trabajo).filter_by(id=orden_trabajo_id).first()
             
             if orden_trabajo:
-                orden_trabajo.movil = movil  # Asignar el móvil a la orden
-                session.commit()  # Guardar cambios en la base de datos
+                orden_trabajo.movil = movil  
+                session.commit() 
                 return True
             else:
                 print(f"No se encontró la orden para el ID de usuario: {orden_trabajo_id}")
