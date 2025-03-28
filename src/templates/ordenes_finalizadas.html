@@ -1,1 +1,92 @@
 
+
+{% extends "layout.html" %}
+{% block contenido %}
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordenes Finalizadas</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .enlace1, .enlace6 {
+            display: inline-block;
+            color: beige;
+            text-decoration: none;
+            background-color: rgb(79, 101, 121);
+            padding: 0.5px;
+            margin: 10px 0px;
+        }
+        .table-container {
+            margin: 0.5px auto;
+            background-color: rgb(253, 253, 253);;
+            padding: 0.5px;
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgb(245, 235, 235);
+            max-width: 150%;
+        }
+        .table {
+            font-size: 0.7em;
+        }
+        th, td {
+            padding: 8px;
+        }
+        body {
+            background-color:rgb(181, 218, 216);
+        }
+    </style>
+</head>
+<body>
+    <div class="top-left">
+        <a class="enlace1" href="inicio" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ⭠ INICIO    
+         </a>
+    
+         <a class="enlace6" href="/contratista" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            ⭠ REGRESAR    
+         </a>
+
+    </div>
+    <div class="table-container">
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+        <tr>
+             <th scope="col">ID</th>
+             <th scope="col">Fecha Reporte</th>
+             <th scope="col">Nombre</th>
+             <th scope="col">Apellido</th>
+             <th scope="col">Tipo Documento</th>
+             <th scope="col">Número Documento</th>
+             <th scope="col">Dirección Falla</th>
+             <th scope="col">Localidad</th>
+             <th scope="col">Email</th>
+             <th scope="col">Celular</th>
+             <th scope="col">Tipo Falla</th>
+             <th scope="col">Movil</th>
+                                              
+          </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %} 
+         <tr>
+               <th scope="row">{{usuario.id}}</th>
+               <th scope="row">{{usuario.fecha_reporte}}</th>
+               <th scope="row">{{usuario.nombre}}</th>
+               <th scope="row">{{usuario.apellido}}</th>
+               <th scope="row">{{usuario.tipo_documento.value}}</th>
+               <th scope="row">{{usuario.numero_documento}}</th>
+               <th scope="row">{{usuario.direccion_falla}}</th>
+               <th scope="row">{{usuario.localidad.value}}</th>
+               <th scope="row">{{usuario.email}}</th>
+               <th scope="row">{{usuario.celular}}</th>
+               <th scope="row">{{usuario.tipo_falla.value}}</th>
+                                         
+        </tr>  
+           {% endfor %}    
+         </tbody>
+       </table>
+    </div>
+    
+     </tbody>
+{% endblock contenido %}  
+
