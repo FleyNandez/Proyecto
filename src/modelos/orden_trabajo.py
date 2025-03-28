@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from src.modelos import Session, Base 
 from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum
-
+from flask import jsonify
 from src.modelos.usuario import Usuario
 from sqlalchemy.orm import relationship
 

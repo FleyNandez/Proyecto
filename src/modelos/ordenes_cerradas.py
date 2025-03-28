@@ -11,8 +11,7 @@ class Ordenes_Cerradas(Base):
     localidad = Column (Enum(LocalidadEnum), unique = True, nullable = False)
     
     
-    
-    
+   
     def __init__(self, direccion_falla,tipo_falla, localidad):
         
         self.direccion_falla = direccion_falla
@@ -26,6 +25,8 @@ class Ordenes_Cerradas(Base):
             ordenes_cerradas = session.query(Ordenes_Cerradas).all()               
         return ordenes_cerradas
     
+    
+     
   
     
 

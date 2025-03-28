@@ -85,28 +85,79 @@
                <th scope="row">{{usuario.tipo_falla.value}}</th>
 
               
-         <td style="text-align: center;">
+               <td style="text-align: center;">
                 {% if usuario.movil %}
-                    <span style="color: green; font-weight: bold;">Asignado: {{ usuario.movil.value }}</span>
-               {% else %}
-                   <span style="color: red; font-weight: bold;">Pendiente</span>
-               <form action="/moviles_ordenes" method="post" style="display: inline-block; margin: 5px 0;">
-                 <select id="movil-{{ usuario.id }}" name="movil" style="font-size: small; padding: 2px;" required>
-                 <option value=""></option>
-                <option value="movil_1">Liviano</option>
-              <option value="movil_2">Canasta</option>
-                 <option value="movil_3">Subterráneo</option>
-                 </select>
-                  <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
-                  <button type="submit" class="btn btn-sm btn-primary" style="font-size: small; padding: 2px 5px;">Asignar</button>
+                    <span id="estado-{{ usuario.id }}" style="color: green; font-weight: bold;">
+                        Asignado: {{ usuario.movil.value }}
+                    </span>
+                {% else %}
+                    <span id="estado-{{ usuario.id }}" style="color: red; font-weight: bold;">Pendiente</span>
+                    <form class="asignar-form" data-id="{{ usuario.id }}" style="display: inline-block; margin: 5px 0;">
+                        <select class="movil-select" name="movil" style="font-size: small; padding: 2px;" required>
+                            <option value="">Selecciona</option>
+                            <option value="movil_1">Liviano</option>
+                            <option value="movil_2">Canasta</option>
+                            <option value="movil_3">Subterráneo</option>
+                        </select>
+                        <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
+                        <button type="submit" class="btn btn-sm btn-primary" style="font-size: small; padding: 2px 5px;">Asignar</button>
                     </form>
-                 {% endif %}
-            </td>
+                {% endif %}
+            </td>                       
         </tr>  
            {% endfor %}    
          </tbody>
        </table>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll(".asignar-form").forEach(form => {
+                form.addEventListener("submit", function(event) {
+                    event.preventDefault();
+
+                    let usuarioId = this.getAttribute("data-id");
+                    let movilSeleccionado = this.querySelector(".movil-select").value;
+                    
+                    if (!movilSeleccionado) {
+                        alert("Debes seleccionar un móvil.");
+                        return;
+                    }
+
+                    fetch("/moviles_ordenes", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            usuario_id: usuarioId,
+                            movil: movilSeleccionado
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            let estadoElemento = document.getElementById("estado-" + usuarioId);
+                            estadoElemento.textContent = "Asignado: " + movilSeleccionado;
+                            estadoElemento.style.color = "green";
+                            
+                            let select = form.querySelector(".movil-select");
+                            let boton = form.querySelector("button");
+
+                            select.disabled = true;
+                            boton.disabled = true;
+                            boton.textContent = "Asignado"; 
+                        } else {
+                            alert("Error al asignar el móvil. Intenta de nuevo.");
+                        }
+                    })
+                    .catch(error => console.error("Error:", error));
+                });
+            });
+        });
+    </script>
+
+    
      </tbody>
 {% endblock contenido %}  
 
