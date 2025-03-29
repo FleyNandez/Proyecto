@@ -53,14 +53,10 @@
         <tr>
              <th scope="col">ID</th>
              <th scope="col">Fecha Reporte</th>
-             <th scope="col">Nombre</th>
-             <th scope="col">Apellido</th>
              <th scope="col">Tipo Documento</th>
              <th scope="col">Número Documento</th>
              <th scope="col">Dirección Falla</th>
-             <th scope="col">Localidad</th>
-             <th scope="col">Email</th>
-             <th scope="col">Celular</th>
+             <th scope="col">Localidad</th>             
              <th scope="col">Tipo Falla</th>
              <th scope="col">Movil</th>
                                               
@@ -70,16 +66,13 @@
             {% for usuario in usuarios %} 
          <tr>
                <th scope="row">{{usuario.id}}</th>
-               <th scope="row">{{usuario.fecha_reporte}}</th>
-               <th scope="row">{{usuario.nombre}}</th>
-               <th scope="row">{{usuario.apellido}}</th>
+               <th scope="row">{{usuario.fecha_reporte}}</th>               
                <th scope="row">{{usuario.tipo_documento.value}}</th>
                <th scope="row">{{usuario.numero_documento}}</th>
                <th scope="row">{{usuario.direccion_falla}}</th>
-               <th scope="row">{{usuario.localidad.value}}</th>
-               <th scope="row">{{usuario.email}}</th>
-               <th scope="row">{{usuario.celular}}</th>
+               <th scope="row">{{usuario.localidad.value}}</th>               
                <th scope="row">{{usuario.tipo_falla.value}}</th>
+               <th scope="row">{{usuario.movil.value}}</th>
                                          
         </tr>  
            {% endfor %}    
