@@ -15,8 +15,8 @@ class Orden_TrabajoController(FlaskController):
 
  @app.route('/orden_trabajo')
  def ordenes():      
-    usuarios = Usuario.obtener_datos_usuario()     
-    return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios=usuarios)
+   usuarios_con_ordenes = Orden_Trabajo.obtener_usuarios_con_ordenes() 
+   return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios_con_ordenes=usuarios_con_ordenes)
  
  
 
@@ -39,7 +39,7 @@ def cerrar_orden():
 @app.route('/ordenes_finalizadas')
 def ordenes_finalizadas():
     ordenes_cerradas = Ordenes_Cerradas.obtener_datos_ordenes_cerradas()    
-    return render_template('ordenes_finalizadas.html', titulo_pagina="Órdenes Finalizadas", ordenes=ordenes_cerradas)
+    return render_template('ordenes_finalizadas.html', titulo_pagina="Ordenes Finalizadas", ordenes=ordenes_cerradas)
 
 
    

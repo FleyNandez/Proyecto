@@ -57,17 +57,13 @@ class Orden_Trabajo(Base):
     def obtener_por_id(orden_id):        
         with Session() as session:
             return session.query(Orden_Trabajo).filter_by(id=orden_id).first()
-        
+    
+    @staticmethod
+    def obtener_usuarios_con_ordenes():
+        with Session() as session:
+            return (
+                session.query(Usuario, Orden_Trabajo).join(Orden_Trabajo, Usuario.id == Orden_Trabajo.id, isouter=True).all())
    
     
-    
-    
-    
-    
-    
-
-    
-    
-
     
     

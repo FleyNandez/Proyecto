@@ -1,119 +1,65 @@
-
-
 {% extends "layout.html" %}
 {% block contenido %}
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orden Trabajo</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-        .enlace1, .enlace6, .enlace8, .enlace10 {
-            display: inline-block;
-            color: beige;
-            text-decoration: none;
-            background-color: rgb(79, 101, 121);
-            padding: 0.5px;
-            margin: 10px 0px;
-        }
-        .table-container {
-            margin: 0.5px auto;
-            background-color: rgb(253, 253, 253);;
-            padding: 0.5px;
-            border-radius: 3px;
-            box-shadow: 0 0 10px rgb(245, 235, 235);
-            max-width: 150%;
-        }
-        .table {
-            font-size: 0.7em;
-        }
-        th, td {
-            padding: 8px;
-        }
-        body {
-            background-color:rgb(181, 218, 216);
-        }
+        .enlace { display: inline-block; color: beige; text-decoration: none; background-color: rgb(79, 101, 121); padding: 0.5px; margin: 10px 0px; }
+        .table-container { margin: 0.5px auto; background-color: rgb(253, 253, 253); padding: 0.5px; border-radius: 3px; box-shadow: 0 0 10px rgb(245, 235, 235); max-width: 150%; }
+        .table { font-size: 0.7em; }
+        th, td { padding: 8px; }
+        body { background-color: rgb(181, 218, 216); }
     </style>
 </head>
 <body>
     <div class="top-left">
-        <a class="enlace1" href="inicio" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ⭠ INICIO    
-         </a>
-    
-         <a class="enlace6" href="/contratista" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ⭠ REGRESAR    
-         </a>
-
-         <a class="enlace8" href="/moviles" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ⭠ MOVILES    
-         </a>
-
-         <a class="enlace10" href="/ordenes_finalizadas" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            ⭠ ORDENES CERRADAS    
-         </a>
+        <a class="enlace" href="inicio">⭠ INICIO</a>
+        <a class="enlace" href="/contratista">⭠ REGRESAR</a>
+        <a class="enlace" href="/moviles">⭠ MOVILES</a>
+        <a class="enlace" href="/ordenes_finalizadas">⭠ ORDENES CERRADAS</a>
     </div>
+
     <div class="table-container">
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
-        <tr>
-             <th scope="col">ID</th>
-             <th scope="col">Fecha Reporte</th>
-             <th scope="col">Nombre</th>
-             <th scope="col">Apellido</th>
-             <th scope="col">Tipo Documento</th>
-             <th scope="col">Número Documento</th>
-             <th scope="col">Dirección Falla</th>
-             <th scope="col">Localidad</th>
-             <th scope="col">Email</th>
-             <th scope="col">Celular</th>
-             <th scope="col">Tipo Falla</th>
-             <th scope="col">Movil</th>
-             
-             
-                                              
-          </tr>
-        </thead>
-        <tbody>
-            {% for usuario in usuarios %} 
-         <tr>
-               <th scope="row">{{usuario.id}}</th>
-               <th scope="row">{{usuario.fecha_reporte}}</th>
-               <th scope="row">{{usuario.nombre}}</th>
-               <th scope="row">{{usuario.apellido}}</th>
-               <th scope="row">{{usuario.tipo_documento.value}}</th>
-               <th scope="row">{{usuario.numero_documento}}</th>
-               <th scope="row">{{usuario.direccion_falla}}</th>
-               <th scope="row">{{usuario.localidad.value}}</th>
-               <th scope="row">{{usuario.email}}</th>
-               <th scope="row">{{usuario.celular}}</th>
-               <th scope="row">{{usuario.tipo_falla.value}}</th>
-
-              
-               <td style="text-align: center;">
-                {% if usuario.movil %}
-                    <span id="estado-{{ usuario.id }}" style="color: green; font-weight: bold;">
-                        Asignado: {{ usuario.movil.value }}
-                    </span>
-                {% else %}
-                    <span id="estado-{{ usuario.id }}" style="color: red; font-weight: bold;">Pendiente</span>
-                    <form class="asignar-form" data-id="{{ usuario.id }}" style="display: inline-block; margin: 5px 0;">
-                        <select class="movil-select" name="movil" style="font-size: small; padding: 2px;" required>
-                            <option value="">Selecciona</option>
-                            <option value="movil_1">Liviano</option>
-                            <option value="movil_2">Canasta</option>
-                            <option value="movil_3">Subterráneo</option>
-                        </select>
-                        <input type="hidden" name="usuario_id" value="{{ usuario.id }}">
-                        <button type="submit" class="btn btn-sm btn-primary" style="font-size: small; padding: 2px 5px;">Asignar</button>
-                    </form>
-                {% endif %}
-            </td>                       
-        </tr>  
-           {% endfor %}    
-         </tbody>
-       </table>
+                <tr>
+                    <th>ID</th><th>Fecha Reporte</th><th>Nombre</th><th>Apellido</th>
+                    <th>Tipo Documento</th><th>Número Documento</th><th>Dirección Falla</th>
+                    <th>Localidad</th><th>Email</th><th>Celular</th><th>Tipo Falla</th><th>Móvil</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario, orden in usuarios_con_ordenes %} 
+                <tr>
+                    <td>{{ usuario.id }}</td><td>{{ usuario.fecha_reporte }}</td><td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellido }}</td><td>{{ usuario.tipo_documento.value }}</td>
+                    <td>{{ usuario.numero_documento }}</td><td>{{ usuario.direccion_falla }}</td>
+                    <td>{{ usuario.localidad.value }}</td><td>{{ usuario.email }}</td>
+                    <td>{{ usuario.celular }}</td><td>{{ usuario.tipo_falla.value }}</td>
+                    <td style="text-align: center;">
+                        {% if orden and orden.movil %}
+                            <span id="estado-{{ usuario.id }}" style="color: green; font-weight: bold;">
+                                Asignado: {{ orden.movil.value }}
+                            </span>
+                        {% else %}
+                            <span id="estado-{{ usuario.id }}" style="color: red; font-weight: bold;">Pendiente</span>
+                            <form class="asignar-form" data-id="{{ usuario.id }}">
+                                <select class="movil-select" name="movil" required>
+                                    <option value="">Selecciona</option>
+                                    <option value="movil_1">Liviano</option>
+                                    <option value="movil_2">Canasta</option>
+                                    <option value="movil_3">Subterráneo</option>
+                                </select>
+                                <button type="submit">Asignar</button>
+                            </form>
+                        {% endif %}
+                    </td>                       
+                </tr>  
+                {% endfor %}    
+            </tbody>
+        </table>
     </div>
 
     <script>
@@ -121,24 +67,12 @@
             document.querySelectorAll(".asignar-form").forEach(form => {
                 form.addEventListener("submit", function(event) {
                     event.preventDefault();
-
                     let usuarioId = this.getAttribute("data-id");
                     let movilSeleccionado = this.querySelector(".movil-select").value;
-                    
-                    if (!movilSeleccionado) {
-                        alert("Debes seleccionar un móvil.");
-                        return;
-                    }
-
+                    if (!movilSeleccionado) { alert("Debes seleccionar un móvil."); return; }
                     fetch("/moviles_ordenes", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({
-                            usuario_id: usuarioId,
-                            movil: movilSeleccionado
-                        }),
+                        method: "POST", headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ usuario_id: usuarioId, movil: movilSeleccionado })
                     })
                     .then(response => response.json())
                     .then(data => {
@@ -146,26 +80,19 @@
                             let estadoElemento = document.getElementById("estado-" + usuarioId);
                             estadoElemento.textContent = "Asignado: " + movilSeleccionado;
                             estadoElemento.style.color = "green";
-                            
                             let select = form.querySelector(".movil-select");
                             let boton = form.querySelector("button");
-
-                            select.disabled = true;
-                            boton.disabled = true;
-                            boton.textContent = "Asignado"; 
-                        } else {
-                            alert("Error al asignar el móvil. Intenta de nuevo.");
-                        }
+                            select.disabled = true; boton.disabled = true; boton.textContent = "Asignado"; 
+                        } else { alert("Error al asignar el móvil. Intenta de nuevo."); }
                     })
                     .catch(error => console.error("Error:", error));
                 });
             });
         });
     </script>
+</body>
+{% endblock contenido %}
 
-
-     </tbody>
-{% endblock contenido %}  
 
          
 
