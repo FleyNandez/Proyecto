@@ -29,8 +29,7 @@ class MovilController(FlaskController):
     
  @app.route('/movil_liviano')
  def movil_liviano():
-    ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_1")
-    print(ordenes)
+    ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_1")    
     return render_template('movil_liviano.html', titulo_pagina="Movil Liviano", ordenes=ordenes)
 
  @app.route('/movil_canasta')
@@ -48,7 +47,7 @@ class MovilController(FlaskController):
 def moviles_ordenes():
     data = request.get_json()  
     if not data:
-        return jsonify({"success": False, "error": "No se enviaron datos"}), 400
+      return jsonify({"success": False, "error": "No se enviaron datos"}), 400
 
     orden_trabajo_id = data.get('usuario_id')
     movil_id = data.get('movil')
@@ -56,10 +55,7 @@ def moviles_ordenes():
     if not orden_trabajo_id or not movil_id:
         return jsonify({"success": False, "error": "Datos incompletos"}), 400
 
-    asignado = Orden_Trabajo.asignar_movil(orden_trabajo_id, movil_id)
+    if Orden_Trabajo.asignar_movil(orden_trabajo_id, movil_id):
+        return jsonify({"success": True, "message": "Movil asignado correctamente"})    
+    return jsonify({"success": False, "error": "No se pudo asignar el móvil"}), 400
 
-    if asignado:
-        print(f"Orden {orden_trabajo_id} asignada al móvil {movil_id}.")
-        return jsonify({"success": True, "message": "Móvil asignado correctamente"})
-    else:
-        return jsonify({"success": False, "error": "No se pudo asignar el móvil"}), 400

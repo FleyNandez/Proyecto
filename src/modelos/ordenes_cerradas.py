@@ -1,30 +1,57 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from src.modelos import Session, Base 
-from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum
+from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum, EstadoOrdenEnum
+from flask import jsonify
+from sqlalchemy.orm import relationship
+from src.modelos.orden_trabajo import Orden_Trabajo
+
 
 class Ordenes_Cerradas(Base):
     __tablename__ = "Ordenes_Cerradas"
-    id = Column (Integer, primary_key = True)
-    direccion_falla = Column (String(300), unique = True, nullable = False)
-    tipo_falla = Column (Enum(TipoFallaEnum), unique = True, nullable = False)
-    localidad = Column (Enum(LocalidadEnum), unique = True, nullable = False)
-    
-    
-   
-    def __init__(self, direccion_falla,tipo_falla, localidad):
-        
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    direccion_falla = Column(String(300), nullable=False)
+    tipo_falla = Column(Enum(TipoFallaEnum), nullable=False)
+    localidad = Column(Enum(LocalidadEnum), nullable=False)
+    movil = Column(Enum(MovilEnum), nullable=False) 
+
+    def __init__(self, direccion_falla, localidad, tipo_falla, movil):
         self.direccion_falla = direccion_falla
-        self.tipo_falla = tipo_falla
         self.localidad = localidad
+        self.tipo_falla = tipo_falla        
+        self.movil = movil
         
-  
+    
+
     @staticmethod
     def obtener_datos_ordenes_cerradas():
         with Session() as session:
-            ordenes_cerradas = session.query(Ordenes_Cerradas).all()               
-        return ordenes_cerradas
-    
+            return session.query(Ordenes_Cerradas).all()
+        
+   
+        
+    @staticmethod
+    def cerrar_ordenes(orden_trabajo_id):
+     with Session() as session:
+        orden = session.query(Orden_Trabajo).filter_by(id=orden_trabajo_id).first()
+        
+             
+
+        if orden:
+            orden_cerrada = Ordenes_Cerradas(
+                direccion_falla=orden.direccion_falla,
+                localidad=orden.localidad,
+                tipo_falla=orden.tipo_falla,
+                movil=orden.movil
+            )
+            session.add(orden_cerrada)
+            session.commit()            
+            return True
+
+        
+
+
+
     
      
   

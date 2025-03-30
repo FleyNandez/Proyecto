@@ -1,9 +1,10 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
 from sqlalchemy.ext.declarative import declarative_base
 from src.modelos import Session, Base 
-from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum
+from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum, EstadoOrdenEnum
 from flask import jsonify
 from src.modelos.usuario import Usuario
+
 from sqlalchemy.orm import relationship
 
 
@@ -15,9 +16,10 @@ class Orden_Trabajo(Base):
     localidad = Column(Enum(LocalidadEnum), unique=False, nullable=False)
     tipo_falla = Column(Enum(TipoFallaEnum), unique=False, nullable=False)    
     movil = Column(Enum(MovilEnum), nullable=True) 
+   
     
     usuario = relationship("Usuario", back_populates="ordenes_trabajo")
-    
+        
 
     def __init__(self, id, direccion_falla, localidad, tipo_falla, movil=None):
         self.id = id
@@ -25,6 +27,8 @@ class Orden_Trabajo(Base):
         self.localidad = localidad
         self.tipo_falla = tipo_falla
         self.movil = movil
+        
+        
 
     @staticmethod
     def obtener_datos_orden():
@@ -38,18 +42,31 @@ class Orden_Trabajo(Base):
             orden_trabajo = session.query(Orden_Trabajo).filter_by(id=orden_trabajo_id).first()
             
             if orden_trabajo:
-                orden_trabajo.movil = movil  
+                orden_trabajo.movil = movil                  
                 session.commit() 
                 return True
-            else:
-                print(f"No se encontró la orden para el ID de usuario: {orden_trabajo_id}")
-                return False
+            return False
 
     @staticmethod
     def obtener_ordenes_por_movil(movil):
         with Session() as session:
             ordenes = session.query(Orden_Trabajo).filter_by(movil=movil).all()
         return ordenes
+    
+    @staticmethod
+    def obtener_por_id(orden_id):        
+        with Session() as session:
+            return session.query(Orden_Trabajo).filter_by(id=orden_id).first()
+        
+   
+    
+    
+    
+    
+    
+    
+
+    
     
 
     

@@ -43,6 +43,3 @@ class Ventanas_PrincipalesController(FlaskController):
    def moviles():
        return render_template('moviles.html', titulo_pagina = "moviles")    
    
-   @app.route('/ordenes_finalizadas')
-   def ordenes_finalizadas():
-       return render_template('ordenes_finalizadas.html', titulo_pagina = "ORDENES FINALIZADAS")

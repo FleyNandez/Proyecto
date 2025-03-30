@@ -31,6 +31,14 @@
         body {
             background-color:rgb(181, 218, 216);
         }
+        .btn-atender {
+            background-color: red;
+            color: white;
+        }
+        .btn-atendido {
+            background-color: green;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -63,15 +71,53 @@
           <td>{{ orden.localidad.value }}</td>
           <td>{{ orden.tipo_falla.value }}</td>
          <td>
-     <form action="/completar_orden" method="post" style="display: inline;">
-       <input type="hidden" name="orden_id" value="{{ orden.id }}">
-       <button type="submit" class="btn btn-success btn-sm">Completar</button>
-   </form>
-         </td>
-        </tr>
-     {% endfor %}    
-       </tbody>
-        </table>
-    </div>
-</body>
-{% endblock contenido %}
+            <form action="/completar_orden" method="post" style="display: inline;" onsubmit="return changeButtonState(this)">
+                <input type="hidden" name="orden_id" value="{{ orden.id }}">
+                <button class="cerrar-orden-btn" data-id="{{ orden.id }}">Por Atender</button>
+            </form>
+                  </td>
+                 </tr>
+              {% endfor %}    
+                </tbody>
+                 </table>
+             </div>
+         
+             <script>                 
+                 function changeButtonState(form) {
+                     var button = form.querySelector("button"); 
+                     button.textContent = "Atendido"; 
+                     button.classList.remove("btn-atender");
+                     button.classList.add("btn-atendido");
+                     return false; 
+                 }
+             </script>
+         </body>
+
+         
+
+         <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const botonesCerrarOrden = document.querySelectorAll(".cerrar-orden-btn");
+            
+                botonesCerrarOrden.forEach(boton => {
+                    boton.addEventListener("click", function () {
+                        const ordenId = this.getAttribute("data-id");
+            
+                        fetch("/cerrar_orden", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ orden_id: ordenId })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            
+                        })
+                        .catch(error => console.error("Error:", error));
+                    });
+                });
+            });
+            </script>
+            
+        
+         
+         {% endblock contenido %}
