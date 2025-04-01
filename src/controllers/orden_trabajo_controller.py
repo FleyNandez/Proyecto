@@ -44,5 +44,3 @@ def ordenes_finalizadas():
 
    
 
- 
-

@@ -58,4 +58,3 @@ def moviles_ordenes():
     if Orden_Trabajo.asignar_movil(orden_trabajo_id, movil_id):
         return jsonify({"success": True, "message": "Movil asignado correctamente"})    
     return jsonify({"success": False, "error": "No se pudo asignar el móvil"}), 400
-
