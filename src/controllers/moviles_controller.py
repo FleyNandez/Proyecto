@@ -27,20 +27,29 @@ class MovilController(FlaskController):
         return redirect(url_for('movil_subterraneo'))
     
     
+
+  
  @app.route('/movil_liviano')
  def movil_liviano():
-    ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_1")    
-    return render_template('movil_liviano.html', titulo_pagina="Movil Liviano", ordenes=ordenes)
+    ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_1")
+    ordenes_cerradas = Ordenes_Cerradas.obtener_datos_ordenes_cerradas()
+    ids_cerrados = [orden.id_reporte for orden in ordenes_cerradas]
+    return render_template('movil_liviano.html',titulo_pagina="Movil Liviano",ordenes=ordenes,ids_cerrados=ids_cerrados)
+
 
  @app.route('/movil_canasta')
  def movil_canasta():
     ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_2")
-    return render_template('movil_canasta.html', titulo_pagina="Movil Canasta", ordenes=ordenes)
+    ordenes_cerradas = Ordenes_Cerradas.obtener_datos_ordenes_cerradas()
+    ids_cerrados = [orden.id_reporte for orden in ordenes_cerradas]
+    return render_template('movil_canasta.html', titulo_pagina="Movil Canasta", ordenes=ordenes, ids_cerrados=ids_cerrados)
 
  @app.route('/movil_subterraneo')
  def movil_subterraneo():
     ordenes = Orden_Trabajo.obtener_ordenes_por_movil("movil_3")
-    return render_template('movil_subterraneo.html', titulo_pagina="Movil Subterraneo", ordenes=ordenes)
+    ordenes_cerradas = Ordenes_Cerradas.obtener_datos_ordenes_cerradas()
+    ids_cerrados = [orden.id_reporte for orden in ordenes_cerradas]
+    return render_template('movil_subterraneo.html', titulo_pagina="Movil Subterraneo", ordenes=ordenes, ids_cerrados=ids_cerrados)
 
 
 @app.route('/moviles_ordenes', methods=['POST'])
