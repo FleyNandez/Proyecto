@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum, DateTime
+import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from src.modelos import Session, Base 
 from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum, EstadoOrdenEnum
@@ -11,7 +12,7 @@ from sqlalchemy.orm import relationship
 
 class Orden_Trabajo(Base):
     __tablename__ = "Orden_Trabajo"
-    id = Column(Integer, ForeignKey("Usuario.id"), primary_key=True)
+    id = Column(Integer, ForeignKey("Usuario.id"), primary_key=True)    
     direccion_falla = Column(String(300), unique=False, nullable=False)
     localidad = Column(Enum(LocalidadEnum), unique=False, nullable=False)
     tipo_falla = Column(Enum(TipoFallaEnum), unique=False, nullable=False)    
@@ -22,7 +23,7 @@ class Orden_Trabajo(Base):
         
 
     def __init__(self, id, direccion_falla, localidad, tipo_falla, movil=None):
-        self.id = id
+        self.id = id        
         self.direccion_falla = direccion_falla
         self.localidad = localidad
         self.tipo_falla = tipo_falla

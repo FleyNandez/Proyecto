@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, Enum, DateTime
+import datetime
 from sqlalchemy.ext.declarative import declarative_base
 from src.modelos import Session, Base 
 from .mis_enums import TipoFallaEnum, LocalidadEnum, MovilEnum, EstadoOrdenEnum
@@ -10,12 +11,15 @@ from src.modelos.orden_trabajo import Orden_Trabajo
 class Ordenes_Cerradas(Base):
     __tablename__ = "Ordenes_Cerradas"
     id = Column(Integer, primary_key=True, autoincrement=True)
+    id_reporte = Column(Integer, ForeignKey('Orden_Trabajo.id'))    
     direccion_falla = Column(String(300), nullable=False)
     tipo_falla = Column(Enum(TipoFallaEnum), nullable=False)
     localidad = Column(Enum(LocalidadEnum), nullable=False)
     movil = Column(Enum(MovilEnum), nullable=False) 
 
-    def __init__(self, direccion_falla, localidad, tipo_falla, movil):
+    def __init__(self, id_reporte, direccion_falla, localidad, tipo_falla, movil):
+        
+        self.id_reporte = id_reporte        
         self.direccion_falla = direccion_falla
         self.localidad = localidad
         self.tipo_falla = tipo_falla        
@@ -39,6 +43,7 @@ class Ordenes_Cerradas(Base):
 
         if orden:
             orden_cerrada = Ordenes_Cerradas(
+                id_reporte=orden.id,                
                 direccion_falla=orden.direccion_falla,
                 localidad=orden.localidad,
                 tipo_falla=orden.tipo_falla,
@@ -50,7 +55,7 @@ class Ordenes_Cerradas(Base):
     @staticmethod
     def buscar_por_radicado(radicado):
         with Session() as session:
-            return session.query(Ordenes_Cerradas).filter_by(id=radicado).first()
+            return session.query(Ordenes_Cerradas).filter_by(id_reporte=radicado).first()
 
         
 
