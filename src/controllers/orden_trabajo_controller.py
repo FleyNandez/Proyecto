@@ -42,5 +42,17 @@ def ordenes_finalizadas():
     return render_template('ordenes_finalizadas.html', titulo_pagina="Ordenes Finalizadas", ordenes=ordenes_cerradas)
 
 
-   
+ 
+@app.route('/consultar_solicitud', methods=['POST'])
+def consultar_solicitud():
+    radicado = request.form.get('radicado')
 
+    if not radicado:
+        return redirect(url_for('consultar')) 
+
+    orden_cerrada = Ordenes_Cerradas.buscar_por_radicado(radicado)
+
+    if orden_cerrada:
+        return render_template('solicitud_atendida.html')
+    else:
+        return render_template('solicitud_en_curso.html')

@@ -47,6 +47,10 @@ class Ordenes_Cerradas(Base):
             session.add(orden_cerrada)
             session.commit()            
             return True
+    @staticmethod
+    def buscar_por_radicado(radicado):
+        with Session() as session:
+            return session.query(Ordenes_Cerradas).filter_by(id=radicado).first()
 
         
 

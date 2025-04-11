@@ -39,4 +39,3 @@ class UsuarioController(FlaskController):
         return redirect(url_for('registro_exitoso', id=usuario.id))
     return render_template('generar_reportes.html', titulo_pagina = "GENERAR REPORTE")
 
-
