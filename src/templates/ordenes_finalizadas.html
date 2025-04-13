@@ -38,13 +38,13 @@
 </head>
 <body>
     <div class="top-left">
-        <a class="enlace1" href="inicio" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="enlace1" href="{{ url_for('inicio') }}" id="navbarDropdown" role="button">
             ⭠ INICIO    
-         </a>
+        </a>
     
-         <a class="enlace11" href="/orden_trabajo" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="enlace11" href="{{ url_for('ordenes') }}" id="navbarDropdown" role="button">
             ⭠ REGRESAR    
-         </a>
+        </a>
 
     </div>
     <div class="table-container">
@@ -57,6 +57,7 @@
              <th scope="col">LOCALIDAD</th>             
              <th scope="col">FALLA REPORTADA</th>
              <th scope="col">MOVIL QUE ATENDIO</th>
+             
                                               
           </tr>
         </thead>
@@ -68,7 +69,9 @@
                <th scope="row">{{orden.direccion_falla}}</th>
                <th scope="row">{{orden.localidad.value}}</th>               
                <th scope="row">{{orden.tipo_falla.value}}</th>
-               <th scope="row">{{orden.movil.value}}</th>
+               <th scope="row">{{orden.movil.value}}</th>               
+               
+            </td>
                                          
         </tr>  
            {% endfor %}    

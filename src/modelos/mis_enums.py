@@ -46,5 +46,6 @@ class MovilEnum(PyEnum):
     
 class EstadoOrdenEnum(PyEnum):
     PENDIENTE = "PENDIENTE"
-    ATENDIDA = "ATENDIDA"
+    ASIGNADA = "ASIGNADA"
+    CERRADA = "CERRADA"
     

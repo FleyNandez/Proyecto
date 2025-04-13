@@ -18,8 +18,6 @@ class Orden_TrabajoController(FlaskController):
    usuarios_con_ordenes = Orden_Trabajo.obtener_usuarios_con_ordenes() 
    return render_template('orden_trabajo.html', titulo_pagina="ORDEN TRABAJO", usuarios_con_ordenes=usuarios_con_ordenes)
  
- 
-
      
 @app.route('/cerrar_orden', methods=['POST'])
 def cerrar_orden():   

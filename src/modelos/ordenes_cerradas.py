@@ -38,24 +38,33 @@ class Ordenes_Cerradas(Base):
     def cerrar_ordenes(orden_trabajo_id):
      with Session() as session:
         orden = session.query(Orden_Trabajo).filter_by(id=orden_trabajo_id).first()
-        
-             
 
         if orden:
             orden_cerrada = Ordenes_Cerradas(
-                id_reporte=orden.id,                
+                id_reporte=orden.id,
                 direccion_falla=orden.direccion_falla,
                 localidad=orden.localidad,
                 tipo_falla=orden.tipo_falla,
                 movil=orden.movil
             )
             session.add(orden_cerrada)
-            session.commit()            
+
+            
+            orden.estado = EstadoOrdenEnum.CERRADA
+            session.commit()
             return True
+        
+
     @staticmethod
     def buscar_por_radicado(radicado):
         with Session() as session:
             return session.query(Ordenes_Cerradas).filter_by(id_reporte=radicado).first()
+        
+    
+    
+
+
+
 
         
 

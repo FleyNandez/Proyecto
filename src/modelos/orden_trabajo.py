@@ -17,6 +17,8 @@ class Orden_Trabajo(Base):
     localidad = Column(Enum(LocalidadEnum), unique=False, nullable=False)
     tipo_falla = Column(Enum(TipoFallaEnum), unique=False, nullable=False)    
     movil = Column(Enum(MovilEnum), nullable=True) 
+    estado = Column(Enum(EstadoOrdenEnum), default=EstadoOrdenEnum.PENDIENTE)
+
    
     
     usuario = relationship("Usuario", back_populates="ordenes_trabajo")
@@ -65,6 +67,5 @@ class Orden_Trabajo(Base):
             return (
                 session.query(Usuario, Orden_Trabajo).join(Orden_Trabajo, Usuario.id == Orden_Trabajo.id, isouter=True).all())
    
-    
     
     
