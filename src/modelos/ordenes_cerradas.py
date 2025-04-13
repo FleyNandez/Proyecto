@@ -60,6 +60,14 @@ class Ordenes_Cerradas(Base):
         with Session() as session:
             return session.query(Ordenes_Cerradas).filter_by(id_reporte=radicado).first()
         
+    @staticmethod
+    def eliminar_orden_cerrada(id):
+        with Session() as session:
+            orden_cerrada = session.query(Ordenes_Cerradas).get(id)
+            session.delete(orden_cerrada)
+            session.commit()
+            return orden_cerrada
+        
     
     
 

@@ -71,14 +71,14 @@
           <td>{{ orden.localidad.value }}</td>
           <td>{{ orden.tipo_falla.value }}</td>
           <td>
-            {% if orden.id in ids_cerrados %}
-                <button class="btn-atendido" disabled>Atendido</button>
-            {% else %}
-                <form action="/completar_orden" method="post" style="display: inline;" onsubmit="return changeButtonState(this)">
-                    <input type="hidden" name="orden_id" value="{{ orden.id }}">
-                    <button class="cerrar-orden-btn btn-atender" data-id="{{ orden.id }}">Por Atender</button>
-                </form>
-            {% endif %}
+            {% if orden.estado.value == 'CERRADA' %}
+           <button class="btn-atendido" disabled>Atendido</button>
+             {% else %}
+              <form action="/completar_orden" method="post" style="display: inline;" onsubmit="return changeButtonState(this)">
+              <input type="hidden" name="orden_id" value="{{ orden.id }}">
+             <button class="cerrar-orden-btn btn-atender" data-id="{{ orden.id }}">Por Atender</button>
+            </form>
+              {% endif %}
         </td>
                  </tr>
               {% endfor %}    

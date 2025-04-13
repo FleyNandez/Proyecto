@@ -57,6 +57,7 @@
              <th scope="col">LOCALIDAD</th>             
              <th scope="col">FALLA REPORTADA</th>
              <th scope="col">MOVIL QUE ATENDIO</th>
+             <th scope="col">FINALIZADO</th>
              
                                               
           </tr>
@@ -69,7 +70,8 @@
                <th scope="row">{{orden.direccion_falla}}</th>
                <th scope="row">{{orden.localidad.value}}</th>               
                <th scope="row">{{orden.tipo_falla.value}}</th>
-               <th scope="row">{{orden.movil.value}}</th>               
+               <th scope="row">{{orden.movil.value}}</th>   
+               <td> <a class="btn btn-primary" href="/eliminar_orden_cerrada/{{orden.id}}">Eliminar </a></td>            
                
             </td>
                                          

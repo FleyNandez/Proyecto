@@ -54,3 +54,9 @@ def consultar_solicitud():
         return render_template('solicitud_atendida.html')
     else:
         return render_template('solicitud_en_curso.html')
+
+@app.route('/eliminar_orden_cerrada/<id>')
+def eliminar_orden_cerrada(id):
+    Ordenes_Cerradas.eliminar_orden_cerrada(id)
+    ordenes_cerradas = Ordenes_Cerradas.obtener_datos_ordenes_cerradas()    
+    return render_template('ordenes_finalizadas.html', titulo_pagina="Ordenes Finalizadas", ordenes=ordenes_cerradas)
